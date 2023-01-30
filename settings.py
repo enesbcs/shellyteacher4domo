@@ -11,7 +11,7 @@ data['trigger_topic3'] = "+/online"               #gen2 device detection
 testrun = False
 retain  = True
 gen1 = True
-gen2 = False
+gen2 = True
 
 shque = []
 shjsons = {}

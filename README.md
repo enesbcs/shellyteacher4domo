@@ -16,6 +16,12 @@ pip3 install paho-mqtt
 git clone https://github.com/enesbcs/shellyteacher4domo.git
 ```
 
+## How to update to program
+First: save your templates.txt files if you modified it, than:
+```
+git pull
+```
+
 ## How to use
 
 1. Edit settings.py file with a plain text editor, and set MQTT server IP address. If discovery prefix is leaved as default 'homeassistant' on the Domoticz MQTT AD hardware, than other settings will fine.
@@ -24,11 +30,16 @@ git clone https://github.com/enesbcs/shellyteacher4domo.git
 > python3 shellyteacher4domo.py
 4. Power Shelly device or restart it
 5. If Teacher finds the device ID in the mqtt_templates.txt, those will be automatically forwarded for the Discovery topic, and as the default publish method is 'RETAIN', it will survive reboot, and Teacher application is not needed to run, until you wants a new Shelly device to be installed
+(In case of Gen2 device, the device has to be started before the Teacher)
 
 ## Tested devices
+Gen1:
 - Shelly 1
 - Shelly 2
 - Shelly Plug and Plug S
 - Shelly 4 Pro
 - Shelly H&T
 - Shelly Motion
+
+Gen2:
+- Shelly Plus 1
