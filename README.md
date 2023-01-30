@@ -30,7 +30,8 @@ git pull
 > python3 shellyteacher4domo.py
 4. Power Shelly device or restart it
 5. If Teacher finds the device ID in the mqtt_templates.txt, those will be automatically forwarded for the Discovery topic, and as the default publish method is 'RETAIN', it will survive reboot, and Teacher application is not needed to run, until you wants a new Shelly device to be installed
-(In case of Gen2 device, the device has to be started before the Teacher)
+
+(In case of Gen2 device, the device has to be started before the Teacher, and make sure to enable "Generic status update over MQTT" at MQTT settings page)
 
 ## Tested devices
 Gen1:
