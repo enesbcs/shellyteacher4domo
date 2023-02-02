@@ -8,6 +8,9 @@ data['trigger_topic1'] = "shellies/announce"      #gen1 device detection
 data['trigger_topic2'] = "shellies_discovery/rpc" #gen2 device reply
 data['trigger_topic3'] = "+/online"               #gen2 device detection
 
+data['gen1_template_file'] = 'mqtt_templates.txt'
+data['gen2_template_file'] = 'mqtt_templates_gen2.txt'
+
 testrun = False
 retain  = True
 gen1 = True
