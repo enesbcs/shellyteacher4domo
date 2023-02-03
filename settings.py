@@ -12,9 +12,10 @@ data['gen1_template_file'] = 'mqtt_templates.txt'
 data['gen2_template_file'] = 'mqtt_templates_gen2.txt'
 
 testrun = False
-retain  = True
-gen1 = True
-gen2 = True
+retain  = True   # if retain is True, config template will be saved onto mqtt broker permanently
+gen1    = True   # enable Gen1 device detection
+gen2    = True   # enable Gen2 device detection
+debug   = False   # print debug messages if True
 
 shque = []
 shjsons = {}

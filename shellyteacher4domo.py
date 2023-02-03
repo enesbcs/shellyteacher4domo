@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import re
 import time
 import json
@@ -10,10 +11,10 @@ class MQTTClient(mqtt.Client): # Gen1 detailed infos and Gen2 alive
  subscribechannel = ""
 
  def on_connect(self, client, userdata, flags, rc):
-  print("connected")#debug
   try:
    self.subscribe(self.subscribechannel,0)
-   print("subscribed",self.subscribechannel)#debug
+   if settings.debug:
+    print("subscribed",self.subscribechannel)#debug
   except Exception as e:
    print("MQTT connection error: "+str(e))
   try:
@@ -42,22 +43,23 @@ class MQTTClient(mqtt.Client): # Gen1 detailed infos and Gen2 alive
      print("JSON decode error:"+str(e)+str(msg2))
      lista = []
    if (lista) and (len(lista)>0):
-     print( "on_message::payload::" + str(msg2))
+     if settings.debug:
+      print( "on_message::payload::" + str(msg2))
      if "id" in lista: #gen1&gen2
        if lista['id'] not in settings.shque:
         settings.shque.append(lista['id'])
         settings.shjsons[ lista['id'] ] = lista
        else:
         print(lista['id']," alive")
-        
-class MQTTClientOnlineCheck(mqtt.Client): #Gen2 hack to get some infos... 
+
+class MQTTClientOnlineCheck(mqtt.Client): #Gen2 hack to get some infos...
  subscribechannel = ""
 
  def on_connect(self, client, userdata, flags, rc):
-  print("connected")#debug
   try:
    self.subscribe(self.subscribechannel,0)
-   print("subscribed",self.subscribechannel)#debug
+   if settings.debug:
+    print("subscribed",self.subscribechannel)#debug
   except Exception as e:
    print("MQTT connection error: "+str(e))
   try:
@@ -134,13 +136,13 @@ def fill_template_str(template, values): # values = {"shelly_id": "shelly-xxxx",
      for r in range(len(m)):
       if m[r].lower() in values:
        cline = cline.replace("%"+m[r]+"%",str(values[m[r]]))
-   return cline 
+   return cline
 
 class TemplateDataFile:
     f = None
     template = {}
     templatename = ""
-    
+
     def __init__(self, file_name):
         try:
          self.f = open(file_name, 'r')
@@ -172,7 +174,7 @@ class TemplateDataFile:
         if self.f is not None:
            self.f.seek(0, 0)
            self.templatename = str(templatename)
-           try:           
+           try:
             mt = {}
             while True:
              file_line = self.f.readline()
@@ -195,13 +197,12 @@ class TemplateDataFile:
                    self.template.append(mt)
                    mt = {}
            except Exception as e:
-            print(e)        
+            print(e)
         if tfe is False or len(self.template)<1:
            self.templatename = ""
         return self.template
 
-pathname = os.path.dirname(sys.argv[0])  
-# print('sys.argv[0] =', pathname )
+pathname = os.path.dirname(sys.argv[0])
 
 if settings.testrun==False:
  if settings.gen1:
@@ -242,6 +243,7 @@ else:
  if settings.gen1:
   settings.shque.append("shellymotionsensor-60A42397667E")
   settings.shjsons["shellymotionsensor-60A42397667E"] = {"id":"shellymotionsensor-60A42397667E","model":"SHMOS-01","mac":"60A42397667E","ip":"192.168.2.32","new_fw":False,"fw_ver":"20211026-072015/v2.0.3@1dfb9313"}  
+
  if settings.gen2:
   settings.shque.append("shellyplus1-a8032abcf5f0")
   settings.shjsons["shellyplus1-a8032abcf5f0"] = {"id":1,"src":"shellyplus1-a8032abcf5f0","dst":"shellies_discovery","result":{"mqtt":{"enable":True,"topic_prefix":"shellyplus1-a8032abcf5f0","rpc_ntf":True,"status_ntf":True,"use_client_cert":False},"sys":{"device":{"name":None,"mac":"A8032ABCF5F0","fw_id":"20221206-141227/0.12.0-gafc2404","discoverable":True,"eco_mode":False,"addon_type":None}}}}
@@ -251,10 +253,10 @@ if settings.gen1:
  filename = os.path.join( str(pathname) , settings.data['gen1_template_file'] )
  tf = TemplateDataFile( filename ) # init template database file for Gen1 devices
 if settings.gen2:
- filename = os.path.join( str(pathname) , settings.data['gen2_template_file'] ) 
+ filename = os.path.join( str(pathname) , settings.data['gen2_template_file'] )
  tf2 = TemplateDataFile( filename ) # init template database file for Gen2 devices
 
-print("Starting eval loop, waiting Shelly devices to appear on MQTT announce... press CTRL-C to cancel") #debug
+print("Starting eval loop, waiting Shelly devices to appear on MQTT announce... press CTRL-C to cancel")
 while loopok:
  if len(settings.shque)>0 and decodinprog==False: #processing incoming messages
   decodinprog = True
