@@ -4,6 +4,7 @@ import json
 import urllib
 import settings
 import paho.mqtt.client as mqtt #pip3 install paho-mqtt
+import sys, os
 
 class MQTTClient(mqtt.Client): # Gen1 detailed infos and Gen2 alive
  subscribechannel = ""
@@ -41,6 +42,7 @@ class MQTTClient(mqtt.Client): # Gen1 detailed infos and Gen2 alive
      print("JSON decode error:"+str(e)+str(msg2))
      lista = []
    if (lista) and (len(lista)>0):
+     print( "on_message::payload::" + str(msg2))
      if "id" in lista: #gen1&gen2
        if lista['id'] not in settings.shque:
         settings.shque.append(lista['id'])
@@ -144,6 +146,8 @@ class TemplateDataFile:
          self.f = open(file_name, 'r')
         except:
          self.f = None
+         print( "ERROR: File open error: " + str(file_name))
+
         self.template = []
         self.templatename = ""
 
@@ -196,6 +200,9 @@ class TemplateDataFile:
            self.templatename = ""
         return self.template
 
+pathname = os.path.dirname(sys.argv[0])  
+# print('sys.argv[0] =', pathname )
+
 if settings.testrun==False:
  if settings.gen1:
   mqttclient1 = MQTTClient() #gen1
@@ -241,9 +248,11 @@ else:
 
 decodinprog = False
 if settings.gen1:
- tf = TemplateDataFile('mqtt_templates.txt') # init template database file for Gen1 devices
+ filename = os.path.join( str(pathname) , settings.data['gen1_template_file'] )
+ tf = TemplateDataFile( filename ) # init template database file for Gen1 devices
 if settings.gen2:
- tf2 = TemplateDataFile('mqtt_templates_gen2.txt') # init template database file for Gen2 devices
+ filename = os.path.join( str(pathname) , settings.data['gen2_template_file'] ) 
+ tf2 = TemplateDataFile( filename ) # init template database file for Gen2 devices
 
 print("Starting eval loop, waiting Shelly devices to appear on MQTT announce... press CTRL-C to cancel") #debug
 while loopok:
