@@ -33,14 +33,21 @@ git pull
 
 (In case of Gen2 device, the device has to be started before the Teacher, and make sure to enable "Generic status update over MQTT" at MQTT settings page)
 
-## Tested devices
+## Tested and working devices
 Gen1:
 - Shelly 1
-- Shelly 2
+- Shelly 1 PM
+- Shelly 1L
+- Shelly 2/Shelly 2.5 relay and roller mode
 - Shelly Plug and Plug S
 - Shelly 4 Pro
 - Shelly H&T
 - Shelly Motion
+- Shelly Door Window 1/2
 
 Gen2:
 - Shelly Plus 1
+
+## Tested and partially working devices
+- Shelly Duo
+- Shelly RGB Bulb (RGB is faulty in Domoticz AD...)
