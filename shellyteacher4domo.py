@@ -180,6 +180,9 @@ class TemplateDataFile:
              file_line = self.f.readline()
              if not file_line:
               break
+             # Skip the comment lines
+             if len( file_line.lstrip()) == 0 or file_line.lstrip()[0] == "#":
+               continue
              if tfs==False and tfe==False: #searching model
               if "["+ self.templatename + "]" in file_line:
                tfs = True
