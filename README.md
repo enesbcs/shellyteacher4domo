@@ -44,10 +44,12 @@ Gen1:
 - Shelly H&T
 - Shelly Motion
 - Shelly Door Window 1/2
+- Shelly Button
+- Shelly i3
+- Shelly Duo
 
 Gen2:
 - Shelly Plus 1
 
 ## Tested and partially working devices
-- Shelly Duo
 - Shelly RGB Bulb (RGB is faulty in Domoticz AD...)
