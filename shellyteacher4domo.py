@@ -269,7 +269,7 @@ while loopok:
     if ('src' in settings.shjsons[devid]) and ('result' in settings.shjsons[devid]):
       guessmodel = settings.shjsons[devid]['src'] #Gen2 device!
       model = guessmodel.split("-")
-      di = {"shelly_id": settings.shjsons[devid]['src'], "shelly_topic": settings.shjsons[devid]['result']['mqtt']['topic_prefix'], "shelly_model": model[0],"shelly_mac":  settings.shjsons[devid]['result']['sys']['device']['mac'],"shelly_ip": "", "shelly_mode": "", "discovery_prefix": settings.data['discovery_prefix']}     
+      di = {"shelly_id": settings.shjsons[devid]['src'], "shelly_topic": settings.shjsons[devid]['result']['mqtt']['topic_prefix'], "shelly_model": model[0],"shelly_mac":  settings.shjsons[devid]['result']['sys']['device']['mac'],"shelly_ip": "", "shelly_mode": "", "discovery_prefix": settings.data['discovery_prefix']}
       mt = tf2.get_templates(model[0])      # get template for specific model
       if len(mt)>0:
          print(">>>GEN2 device ",di["shelly_id"],di["shelly_topic"],"found")
@@ -303,15 +303,19 @@ while loopok:
       if di["shelly_mode"] != "":
          model += "-"+di["shelly_mode"]
       mt = tf.get_templates(model)      # get template for specific model
+      if len(mt)<1: # fallback to generic description if mode specific not found
+         mt = tf.get_templates(di["shelly_model"])
+         if len(mt)>0:
+          model = di["shelly_model"]
 
       if len(mt)>0:
-         print(">>>GEN1 device ",di["shelly_ip"],di["shelly_model"],di["shelly_id"],"found")
+         print(">>>GEN1 device ",di["shelly_ip"],model,di["shelly_id"],"found")
 
          for i in range(len(mt)):
             mqttstr = {"topic": fill_template_str(mt[i]['topic'], di),"payload": fill_template_str(mt[i]['payload'], di)}
             settings.mqttsender.append(mqttstr)
       else:
-         print("---ERROR: GEN1 device ",di["shelly_ip"],di["shelly_model"],di["shelly_id"],"template not found")
+         print("---ERROR: GEN1 device ",di["shelly_ip"],model,di["shelly_id"],"template not found")
 
   try:
     del settings.shque[0]

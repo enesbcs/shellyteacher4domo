@@ -47,9 +47,11 @@ Gen1:
 - Shelly Button
 - Shelly i3
 - Shelly Duo
+- Shelly Dimmer 1/2
 
 Gen2:
 - Shelly Plus 1
 
 ## Tested and partially working devices
 - Shelly RGB Bulb (RGB is faulty in Domoticz AD...)
+- Energy reporting will not be good, until Domoticz AD supports basic math in templates
