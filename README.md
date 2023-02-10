@@ -51,6 +51,7 @@ Gen1:
 
 Gen2:
 - Shelly Plus 1
+- Shelly Plus H&T
 
 ## Tested known problems with devices
 - Shelly RGB Bulb (RGB is faulty in Domoticz AD...)
