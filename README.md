@@ -51,8 +51,10 @@ Gen1:
 
 Gen2:
 - Shelly Plus 1
-- Shelly Plus H&T
+- Shelly Plus 1PM
+- Shelly Plus H&T (battery property currently unavailable)
+- Shelly Pro 4PM
 
-## Tested known problems with devices
+## Known problems with devices
 - Shelly RGB Bulb (RGB is faulty in Domoticz AD...)
-- Energy reporting will not be good, until Domoticz AD supports basic math in templates
+- Energy reporting will not be good, until Domoticz AD implements basic math in templates
