@@ -52,7 +52,7 @@ Gen1:
 Gen2:
 - Shelly Plus 1
 - Shelly Plus 1PM
-- Shelly Plus H&T (battery property currently unavailable)
+- Shelly Plus H&T
 - Shelly Pro 4PM
 
 ## Known problems with devices
