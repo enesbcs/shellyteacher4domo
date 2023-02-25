@@ -214,6 +214,8 @@ if settings.testrun==False:
   print("Connecting to MQTT server...")
   loopok = False
   try:
+    if settings.data['mqtt_user'] != "" or settings.data['mqtt_pass'] != "":
+     mqttclient1.username_pw_set(settings.data['mqtt_user'],settings.data['mqtt_pass'])
     mqttclient1.connect(settings.data['mqtt_ip'],int(settings.data['mqtt_port']),keepalive=60)
     mqttclient1.loop_start()
     loopok = True
@@ -222,9 +224,13 @@ if settings.testrun==False:
  if settings.gen2:
   mqttclient2 = MQTTClient() #gen2
   mqttclient2.subscribechannel = settings.data['trigger_topic2']
+  if settings.gen1==False:
+   mqttclient1 = mqttclient2
   print("Connecting to MQTT server...")
   loopok = False
   try:
+    if settings.data['mqtt_user'] != "" or settings.data['mqtt_pass'] != "":
+     mqttclient2.username_pw_set(settings.data['mqtt_user'],settings.data['mqtt_pass'])
     mqttclient2.connect(settings.data['mqtt_ip'],int(settings.data['mqtt_port']),keepalive=60)
     mqttclient2.loop_start()
     loopok = True
@@ -235,6 +241,8 @@ if settings.testrun==False:
   print("Connecting to MQTT server...")
   loopok = False
   try:
+    if settings.data['mqtt_user'] != "" or settings.data['mqtt_pass'] != "":
+     mqttclient3.username_pw_set(settings.data['mqtt_user'],settings.data['mqtt_pass'])
     mqttclient3.connect(settings.data['mqtt_ip'],int(settings.data['mqtt_port']),keepalive=60)
     mqttclient3.loop_start()
     loopok = True
@@ -248,8 +256,10 @@ else:
   settings.shjsons["shellymotionsensor-60A42397667E"] = {"id":"shellymotionsensor-60A42397667E","model":"SHMOS-01","mac":"60A42397667E","ip":"192.168.2.32","new_fw":False,"fw_ver":"20211026-072015/v2.0.3@1dfb9313"}  
 
  if settings.gen2:
-  settings.shque.append("shellyplus1-a8032abcf5f0")
-  settings.shjsons["shellyplus1-a8032abcf5f0"] = {"id":1,"src":"shellyplus1-a8032abcf5f0","dst":"shellies_discovery","result":{"mqtt":{"enable":True,"topic_prefix":"shellyplus1-a8032abcf5f0","rpc_ntf":True,"status_ntf":True,"use_client_cert":False},"sys":{"device":{"name":None,"mac":"A8032ABCF5F0","fw_id":"20221206-141227/0.12.0-gafc2404","discoverable":True,"eco_mode":False,"addon_type":None}}}}
+  #settings.shque.append("shellyplus1-a8032abcf5f0")
+  #settings.shjsons["shellyplus1-a8032abcf5f0"] = {"id":1,"src":"shellyplus1-a8032abcf5f0","dst":"shellies_discovery","result":{"mqtt":{"enable":True,"topic_prefix":"shellyplus1-a8032abcf5f0","rpc_ntf":True,"status_ntf":True,"use_client_cert":False},"sys":{"device":{"name":None,"mac":"A8032ABCF5F0","fw_id":"20221206-141227/0.12.0-gafc2404","discoverable":True,"eco_mode":False,"addon_type":None}}}}
+  settings.shque.append("shellyplusht-a1132abcf5f0")
+  settings.shjsons["shellyplusht-a1132abcf5f0"] = {"id":1,"src":"shellyplusht-a1132abcf5f0","dst":"shellies_discovery","result":{"mqtt":{"enable":True,"topic_prefix":"shellyplusht-a1132abcf5f0","rpc_ntf":True,"status_ntf":True,"use_client_cert":False},"sys":{"device":{"name":None,"mac":"A1132ABCF5F0","fw_id":"20221206-141227/0.12.0-gafc2404","discoverable":True,"eco_mode":False,"addon_type":None}}}}
 
 decodinprog = False
 if settings.gen1:

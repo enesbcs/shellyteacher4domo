@@ -37,7 +37,7 @@ git pull
 Gen1:
 - Shelly 1 / 1PM / 1L
 - Shelly 2/Shelly 2.5 relay and roller mode
-- Shelly Plug and Plug S
+- Shelly Plug / Plug S
 - Shelly 4 Pro
 - Shelly H&T
 - Shelly Motion
@@ -50,9 +50,13 @@ Gen1:
 - Shelly UNI
 
 Gen2:
-- Shelly Plus 1
-- Shelly Plus 1PM
+- Shelly Plus 1 / 1PM
+- Shelly Plus Plug
 - Shelly Plus H&T
+- Shelly Plus I4
+- Shelly Pro 1 / 1PM
+- Shelly Pro 2
+- Shelly Pro 3
 - Shelly Pro 4PM
 
 ## Known problems with devices
