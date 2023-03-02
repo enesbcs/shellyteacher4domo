@@ -27,7 +27,10 @@ git pull
 1. Edit settings.py file with a plain text editor, and set MQTT server IP address. If discovery prefix is leaved as default 'homeassistant' on the Domoticz MQTT AD hardware, than other settings will fine.
 2. Make sure that the Shelly device connects to the same MQTT broker IP address.
 3. Start Teacher
-> python3 shellyteacher4domo.py
+```
+cd shellyteacher4domo
+python3 shellyteacher4domo.py
+```
 4. Power Shelly device or restart it
 5. If Teacher finds the device ID in the mqtt_templates.txt, those will be automatically forwarded for the Discovery topic, and as the default publish method is 'RETAIN', it will survive reboot, and Teacher application is not needed to run, until you wants a new Shelly device to be installed
 
