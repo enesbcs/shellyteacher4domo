@@ -65,4 +65,4 @@ Gen2:
 
 ## Known problems with devices
 - Shelly RGB Bulb (RGB is faulty in Domoticz AD...)
-- Energy reporting will not be good, until Domoticz AD implements basic math in templates
+- Energy reporting will not be good, until Domoticz AD implements basic math in templates (watt-minute to watt-hour)
