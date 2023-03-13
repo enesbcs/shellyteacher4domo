@@ -52,6 +52,8 @@ Gen1:
 - Shelly Dimmer 1/2
 - Shelly Vintage
 - Shelly UNI
+- Shelly EM
+- Shelly 3EM
 
 Gen2:
 - Shelly Plus 1 / 1PM
