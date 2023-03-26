@@ -57,6 +57,7 @@ Gen1:
 
 Gen2:
 - Shelly Plus 1 / 1PM
+- Shelly Plus 2PM
 - Shelly Plus Plug
 - Shelly Plus H&T
 - Shelly Plus I4
