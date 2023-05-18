@@ -10,6 +10,9 @@ import sys, os
 class MQTTClient(mqtt.Client): # Gen1 detailed infos and Gen2 alive
  subscribechannel = ""
 
+ def _on_pre_connect(self, func):
+     pass
+
  def on_connect(self, client, userdata, flags, rc):
   try:
    self.subscribe(self.subscribechannel,0)
@@ -54,6 +57,9 @@ class MQTTClient(mqtt.Client): # Gen1 detailed infos and Gen2 alive
 
 class MQTTClientOnlineCheck(mqtt.Client): #Gen2 hack to get some infos...
  subscribechannel = ""
+
+ def _on_pre_connect(self, func):
+     pass
 
  def on_connect(self, client, userdata, flags, rc):
   try:
