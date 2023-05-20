@@ -37,6 +37,11 @@ python3 shellyteacher4domo.py
 
 (In case of Gen2 device, the device has to be started before the Teacher, and make sure to enable "Generic status update over MQTT" at MQTT settings page)
 
+Windows and Linux x64 binary builds published and can be downloaded from releases:
+https://github.com/enesbcs/shellyteacher4domo/releases
+
+A GUI is also available when TKInter works, this is the default now, Console mode can be requested by specifying -c parameter at the command line!
+
 ## Implemented devices
 Gen1:
 - Shelly 1 / 1PM / 1L
