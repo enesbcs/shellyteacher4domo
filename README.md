@@ -1,3 +1,5 @@
+[![Release downloads](https://img.shields.io/github/downloads/enesbcs/shellyteacher4domo/total.svg)]() [![Code size](https://img.shields.io/github/languages/code-size/enesbcs/shellyteacher4domo)]() [![Last commit](https://img.shields.io/github/last-commit/enesbcs/shellyteacher4domo)]()
+
 # ShellyTeacher 4 Domoticz
 Shelly device teacher for Domoticz MQTT Autodiscovery hardware
 
