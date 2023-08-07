@@ -3,10 +3,13 @@
 # ShellyTeacher 4 Domoticz
 Shelly device teacher for Domoticz MQTT Autodiscovery hardware
 
-**This is a beta test version, make sure to not use on production server. You have been warned!**
+You need to understand before installation:
+- this is not compatible with the old ShellyMQTT plugin, its based on a different hardware, which will create new devices
+- only the Shelly device types listed in the "Implemented devices" will be recognised, but you can change/enhance templates.txt file to add more devices
+- its not a plugin, nor a service, it doesn't need to run all the time - only once (Domoticz MQTT Autodiscovery is the Domoticz integrated hardware)
 
 ## How it works
-When this program started it connects to the MQTT server and waits Shelly device announcements.
+When this program started it connects to the MQTT server and awaits for Shelly device announcements.
 Domoticz MQTT Autodiscovery hardware has to be enabled and Shelly devices has to connect to the same MQTT broker,
 as the Domoticz and this program.
 
@@ -20,7 +23,7 @@ git clone https://github.com/enesbcs/shellyteacher4domo.git
 In case you want to save the configurations after rebooting, please make sure that MQTT broker [persistence settings](https://pagefault.blog/2020/02/05/how-to-set-up-persistent-storage-for-mosquitto-mqtt-broker/) configured correctly!
 
 ## How to update the program
-First: save your templates.txt files if you modified it, than:
+First: backup your templates.txt files if you modified it, than:
 ```
 git pull
 ```
