@@ -10,7 +10,7 @@ You need to understand before installation:
 
 ## How it works
 When this program started it connects to the MQTT server and awaits for Shelly device announcements.
-Domoticz MQTT Autodiscovery hardware has to be enabled and Shelly devices has to connect to the same MQTT broker,
+[Domoticz MQTT Autodiscovery hardware](https://www.domoticz.com/wiki/MQTT#Add_hardware_.22MQTT_Auto_Discovery_Client_Gateway.22) has to be enabled and Shelly devices has to connect to the same [MQTT broker](https://www.domoticz.com/wiki/MQTT#Installing_Mosquitto),
 as the Domoticz and this program.
 
 ## How to install
