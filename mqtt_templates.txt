@@ -167,7 +167,7 @@ payload={"name": "%shelly_id% Battery", "stat_t": "~sensor/battery", "frc_upd": 
 topic=%discovery_prefix%/sensor/%shelly_id%/RSSI/config
 payload={"name": "%shelly_id% WiFi Signal", "stat_t": "~info", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-rssi", "qos": 0, "~": "shellies/%shelly_id%/", "entity_category": "diagnostic", "dev_cla": "signal_strength", "stat_cla": "measurement", "unit_of_meas": "dBm", "val_tpl": "{{value_json.wifi_sta.rssi}}", "icon": "mdi:signal", "exp_aft": 51839, "device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}}
 
-[SHMOS-01] # Shelly Motion
+[SHMOS-01][SHMOS-02] # Shelly Motion
 topic=%discovery_prefix%/sensor/%shelly_id%/lux/config
 payload={"name": "%shelly_id% Lux", "stat_t": "~info", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-lux", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "illuminance", "stat_cla": "measurement", "unit_of_meas": "lx", "val_tpl": "{{value_json.lux.value}}", "exp_aft": 4320,"device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}}
 topic=%discovery_prefix%/binary_sensor/%shelly_id%/motion/config
@@ -377,3 +377,71 @@ topic=%discovery_prefix%/sensor/%shelly_id%-2/total/config
 payload={"name": "%shelly_id% Total 2", "stat_t": "~emeter/2/total", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-total-2", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{value|round(2)}}"}
 topic=%discovery_prefix%/sensor/%shelly_id%-2/totalreturned/config
 payload={"name": "%shelly_id% Total Returned 1", "stat_t": "~emeter/2/total_returned", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-totalreturned-2", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{value|round(2)}}"}
+
+[SHRGBW2-white] # Shelly RGBW2 white mode
+topic=%discovery_prefix%/binary_sensor/%shelly_id%-input-0/config
+payload={"name": "%shelly_id% Input 0", "stat_t": "~input/0", "enabled_by_default": true, "uniq_id": "%shelly_id%-input-0", "qos": 0,  "~": "shellies/%shelly_id%/", "pl_on": "1", "pl_off": "0", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/select/%shelly_id%/input_event-0/config
+payload={"name": "%shelly_id% Input Event 0", "json_attributes_topic": "~input_event/0", "value_template":"{{value_json.event}}" , "cmd_t": "~dummy", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-event-0", "~": "shellies/%shelly_id%/", "dev_cla": "event", "stat_cla": "selector" , "ops":["-","S","L"] }
+topic=%discovery_prefix%/light/%shelly_id%-0/config
+payload={"name": "%shelly_id% White 0", "cmd_t": "~white/0/set", "stat_t": "~white/0/status","payload_on": "{\"turn\":\"on\",\"mode\":\"white\"}","payload_off": "{\"turn\":\"off\",\"mode\":\"white\"}", "value_template": "{{value_json.ison}}","stat_tpl": "{%if value_json.ison==true%}ON{%else%}OFF{%endif%}","brightness_command_topic":"~white/0/set","brightness_state_topic":"~white/0/status","brightness": true,"color_mode": true,"supported_color_modes": ["brightness"], "brightness_scale":100, "bri_val_tpl":"{{value_json.brightness}}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-white-0", "qos": 0, "~": "shellies/%shelly_id%/"}
+topic=%discovery_prefix%/switch/%shelly_id%-0/config
+payload={"name": "%shelly_id% White 0 onoff", "cmd_t": "~white/0/command", "stat_t": "~white/0", "pl_off": "off", "pl_on": "on", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-white-0-sw", "~": "shellies/%shelly_id%/"}
+topic=%discovery_prefix%/sensor/%shelly_id%-0/power/config
+payload={"name": "%shelly_id% Power 0", "stat_t": "~white/0/power", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-white-power-0", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "power", "stat_cla": "measurement", "unit_of_meas": "W", "val_tpl": "{{value|float|round(1)}}"}
+topic=%discovery_prefix%/sensor/%shelly_id%-0/energy/config
+payload={"name": "%shelly_id% Energy 0", "stat_t": "~white/0/energy", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "frc_upd": "false", "enabled_by_default": false, "uniq_id": "%shelly_id%-light-energy-0", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{(value|float/60)|round(2)}}"}
+topic=%discovery_prefix%/light/%shelly_id%-1/config
+payload={"name": "%shelly_id% White 1", "cmd_t": "~white/1/set", "stat_t": "~white/1/status","payload_on": "{\"turn\":\"on\",\"mode\":\"white\"}","payload_off": "{\"turn\":\"off\",\"mode\":\"white\"}", "value_template": "{{value_json.ison}}","stat_tpl": "{%if value_json.ison==true%}ON{%else%}OFF{%endif%}","brightness_command_topic":"~white/1/set","brightness_state_topic":"~white/1/status","brightness": true,"color_mode": true,"supported_color_modes": ["brightness"], "brightness_scale":100, "bri_val_tpl":"{{value_json.brightness}}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-white-1", "qos": 0, "~": "shellies/%shelly_id%/"}
+topic=%discovery_prefix%/switch/%shelly_id%-1/config
+payload={"name": "%shelly_id% White 1 onoff", "cmd_t": "~white/1/command", "stat_t": "~white/1", "pl_off": "off", "pl_on": "on", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-white-1-sw", "~": "shellies/%shelly_id%/"}
+topic=%discovery_prefix%/sensor/%shelly_id%-1/power/config
+payload={"name": "%shelly_id% Power 1", "stat_t": "~white/1/power", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-white-power-1", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "power", "stat_cla": "measurement", "unit_of_meas": "W", "val_tpl": "{{value|float|round(1)}}"}
+topic=%discovery_prefix%/sensor/%shelly_id%-1/energy/config
+payload={"name": "%shelly_id% Energy 1", "stat_t": "~white/1/energy", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "frc_upd": "false", "enabled_by_default": false, "uniq_id": "%shelly_id%-light-energy-1", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{(value|float/60)|round(2)}}"}
+topic=%discovery_prefix%/light/%shelly_id%-2/config
+payload={"name": "%shelly_id% White 2", "cmd_t": "~white/2/set", "stat_t": "~white/2/status","payload_on": "{\"turn\":\"on\",\"mode\":\"white\"}","payload_off": "{\"turn\":\"off\",\"mode\":\"white\"}", "value_template": "{{value_json.ison}}","stat_tpl": "{%if value_json.ison==true%}ON{%else%}OFF{%endif%}","brightness_command_topic":"~white/2/set","brightness_state_topic":"~white/2/status","brightness": true,"color_mode": true,"supported_color_modes": ["brightness"], "brightness_scale":100, "bri_val_tpl":"{{value_json.brightness}}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-white-2", "qos": 0, "~": "shellies/%shelly_id%/"}
+topic=%discovery_prefix%/switch/%shelly_id%-2/config
+payload={"name": "%shelly_id% White 2 onoff", "cmd_t": "~white/2/command", "stat_t": "~white/2", "pl_off": "off", "pl_on": "on", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-white-2-sw", "~": "shellies/%shelly_id%/"}
+topic=%discovery_prefix%/sensor/%shelly_id%-2/power/config
+payload={"name": "%shelly_id% Power 2", "stat_t": "~white/2/power", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-white-power-2", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "power", "stat_cla": "measurement", "unit_of_meas": "W", "val_tpl": "{{value|float|round(1)}}"}
+topic=%discovery_prefix%/sensor/%shelly_id%-2/energy/config
+payload={"name": "%shelly_id% Energy 2", "stat_t": "~white/2/energy", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "frc_upd": "false", "enabled_by_default": false, "uniq_id": "%shelly_id%-light-energy-2", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{(value|float/60)|round(2)}}"}
+topic=%discovery_prefix%/light/%shelly_id%-3/config
+payload={"name": "%shelly_id% White 3", "cmd_t": "~white/3/set", "stat_t": "~white/3/status","payload_on": "{\"turn\":\"on\",\"mode\":\"white\"}","payload_off": "{\"turn\":\"off\",\"mode\":\"white\"}", "value_template": "{{value_json.ison}}","stat_tpl": "{%if value_json.ison==true%}ON{%else%}OFF{%endif%}","brightness_command_topic":"~white/3/set","brightness_state_topic":"~white/3/status","brightness": true,"color_mode": true,"supported_color_modes": ["brightness"], "brightness_scale":100, "bri_val_tpl":"{{value_json.brightness}}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-white-3", "qos": 0, "~": "shellies/%shelly_id%/"}
+topic=%discovery_prefix%/switch/%shelly_id%-3/config
+payload={"name": "%shelly_id% White 3 onoff", "cmd_t": "~white/3/command", "stat_t": "~white/3", "pl_off": "off", "pl_on": "on", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-white-3-sw", "~": "shellies/%shelly_id%/"}
+topic=%discovery_prefix%/sensor/%shelly_id%-3/power/config
+payload={"name": "%shelly_id% Power 3", "stat_t": "~white/3/power", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-white-power-3", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "power", "stat_cla": "measurement", "unit_of_meas": "W", "val_tpl": "{{value|float|round(1)}}"}
+topic=%discovery_prefix%/sensor/%shelly_id%-3/energy/config
+payload={"name": "%shelly_id% Energy 0", "stat_t": "~white/3/energy", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "frc_upd": "false", "enabled_by_default": false, "uniq_id": "%shelly_id%-light-energy-3", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{(value|float/60)|round(2)}}"}
+
+[SH2LED-1] # Shelly2LED    # Partially works
+topic=%discovery_prefix%/light/%shelly_id%-0/config
+payload={"name": "%shelly_id% LED 0", "cmd_t": "~color/0/set", "stat_t": "~color/0/status","payload_on": "{\"turn\":\"on\"}","payload_off": "{\"turn\":\"off\"}", "value_template": "{{value_json.ison}}","stat_tpl": "{%if value_json.ison==true%}ON{%else%}OFF{%endif%}","brightness_command_topic":"~color/0/set","brightness_state_topic":"~color/0/status","brightness": true,"color_mode": true,"supported_color_modes": ["brightness"], "brightness_scale":100, "bri_val_tpl":"{{value_json.brightness}}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-light-0", "qos": 0, "~": "shellies/%shelly_id%/"}
+topic=%discovery_prefix%/light/%shelly_id%-1/config
+payload={"name": "%shelly_id% LED 1", "cmd_t": "~color/1/set", "stat_t": "~color/1/status","payload_on": "{\"turn\":\"on\"}","payload_off": "{\"turn\":\"off\"}", "value_template": "{{value_json.ison}}","stat_tpl": "{%if value_json.ison==true%}ON{%else%}OFF{%endif%}","brightness_command_topic":"~color/1/set","brightness_state_topic":"~color/1/status","brightness": true,"color_mode": true,"supported_color_modes": ["brightness"], "brightness_scale":100, "bri_val_tpl":"{{value_json.brightness}}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-light-1", "qos": 0, "~": "shellies/%shelly_id%/"}
+
+[SHSM-01] # Shelly Smoke
+topic=%discovery_prefix%/sensor/%shelly_id%-temperature/config
+payload={"name": "%shelly_id% Temperature", "stat_t": "~sensor/temperature", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-temperature", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C", "val_tpl": "{%if is_number(value) and -100<value|int<900%}{{value|round(1)}}{%else%}unknown{%endif%}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%/battery/config
+payload={"name": "%shelly_id% Battery", "stat_t": "~sensor/battery", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-battery", "qos": 0, "device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}, "~": "shellies/%shelly_id%/", "entity_category": "diagnostic", "dev_cla": "battery", "stat_cla": "measurement", "unit_of_meas": "%", "val_tpl": "{{value|float|round}}", "exp_aft": 51839}
+topic=%discovery_prefix%/binary_sensor/%shelly_id%/config
+payload={"name": "%shelly_id% Smoke", "stat_t": "~sensor/smoke", "enabled_by_default": true, "uniq_id": "%shelly_id%-smoke", "qos": 0, "~": "shellies/%shelly_id%/", "entity_category": "diagnostic", "pl_on": "true", "pl_off": "false", "dev_cla": "smoke"}
+
+[SHWT-01] # Shelly Flood
+topic=%discovery_prefix%/sensor/%shelly_id%-temperature/config
+payload={"name": "%shelly_id% Temperature", "stat_t": "~sensor/temperature", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-temperature", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C", "val_tpl": "{%if is_number(value) and -100<value|int<900%}{{value|round(1)}}{%else%}unknown{%endif%}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%/battery/config
+payload={"name": "%shelly_id% Battery", "stat_t": "~sensor/battery", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-battery", "qos": 0, "device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}, "~": "shellies/%shelly_id%/", "entity_category": "diagnostic", "dev_cla": "battery", "stat_cla": "measurement", "unit_of_meas": "%", "val_tpl": "{{value|float|round}}", "exp_aft": 51839}
+topic=%discovery_prefix%/binary_sensor/%shelly_id%/config
+payload={"name": "%shelly_id% Flood", "stat_t": "~sensor/flood", "enabled_by_default": true, "uniq_id": "%shelly_id%-flood", "qos": 0, "~": "shellies/%shelly_id%/", "entity_category": "diagnostic", "pl_on": "true", "pl_off": "false", "dev_cla": "moisture"}
+
+[SHGS-1] # Shelly Gas
+topic=%discovery_prefix%/sensor/%shelly_id%/gas_ppm/config
+payload={"name": "%shelly_id% Gas concentration", "stat_t": "~sensor/concentration", "enabled_by_default": true, "uniq_id": "%shelly_id%-gas", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "carbon_dioxide", "stat_cla": "measurement", "unit_of_meas": "ppm", "val_tpl": "{{value|float|round(1)}}","device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}}
+topic=%discovery_prefix%/select/%shelly_id%/operation/config
+payload={"name": "%shelly_id% Operation", "stat_t": "~sensor/operation", "cmd_t": "~dummy", "enabled_by_default": true, "uniq_id": "%shelly_id%-operation", "~": "shellies/%shelly_id%/", "dev_cla": "event", "stat_cla": "selector" , "ops":["unknown","warmup","normal","fault"] }
+topic=%discovery_prefix%/select/%shelly_id%/gas_state/config
+payload={"name": "%shelly_id% Gas", "stat_t": "~sensor/gas", "cmd_t": "~dummy", "enabled_by_default": true, "uniq_id": "%shelly_id%-gasstate", "~": "shellies/%shelly_id%/", "dev_cla": "event", "stat_cla": "selector" , "ops":["unknown","none","mild","heavy","test"] }

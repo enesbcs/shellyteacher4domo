@@ -54,7 +54,7 @@ Gen1:
 - Shelly Plug / Plug S
 - Shelly 4 Pro
 - Shelly H&T
-- Shelly Motion
+- Shelly Motion 1/2
 - Shelly Door Window 1/2
 - Shelly Button
 - Shelly i3
@@ -64,10 +64,15 @@ Gen1:
 - Shelly UNI
 - Shelly EM
 - Shelly 3EM
+- Shelly Smoke
+- Shelly Flood
+- Shelly Gas
+- Shelly2LED
+- Shelly RGBW2 only with 4 channel white mode
 
 Gen2:
 - Shelly Plus 1 / 1PM
-- Shelly Plus 2PM
+- Shelly Plus 2PM (*)
 - Shelly Plus Plug
 - Shelly Plus H&T
 - Shelly Plus I4
@@ -77,6 +82,6 @@ Gen2:
 - Shelly Pro 4PM
 
 ## Known problems with devices
-- Shelly RGB Bulb (RGB is faulty in Domoticz AD...)
-- Energy reporting will not be good, until Domoticz AD implements basic math in templates (watt-minute to watt-hour)
-- Gen2 Cover devices needs JSON template support or Script based fix (see https://github.com/enesbcs/shellyteacher4domo/issues/13)
+- Every Gen1 RGB devices (RGB is faulty in Domoticz AD...) (see https://github.com/enesbcs/shellyteacher4domo/issues/7)
+- Energy reporting will not be good, until Domoticz AD implements basic math in templates (watt-minute to watt-hour) (see https://github.com/enesbcs/shellyteacher4domo/issues/6)
+- Gen2 Cover devices (like Plus 2PM) needs JSON template support or Script based fix (see https://github.com/enesbcs/shellyteacher4domo/issues/13#issuecomment-1627367168)

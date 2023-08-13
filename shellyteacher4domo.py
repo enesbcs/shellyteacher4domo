@@ -34,10 +34,13 @@ def exitApp():
 def printLn(s):
     global app, text_area
     if app is not None and text_area is not None:
-     text_area.configure(state ='normal')
-     text_area.insert(tk.INSERT,str(s)+"\n")
-     text_area.configure(state ='disabled')
-     text_area.see('end')
+     try:
+      text_area.configure(state ='normal')
+      text_area.insert(tk.INSERT,str(s)+"\n")
+      text_area.configure(state ='disabled')
+      text_area.see('end')
+     except:
+      print(s)
     else:
      print(s)
 
@@ -520,8 +523,10 @@ def connect_mqtt():
    settings.shque.append("shellymotionsensor-60A42397667E")
    settings.shjsons["shellymotionsensor-60A42397667E"] = {"id":"shellymotionsensor-60A42397667E","model":"SHMOS-01","mac":"60A42397667E","ip":"192.168.2.32","new_fw":False,"fw_ver":"20211026-072015/v2.0.3@1dfb9313"}  
   if settings.gen2:
-   settings.shque.append("shellyplus1-a8032abcf5f0")
-   settings.shjsons["shellyplus1-a8032abcf5f0"] = {"id":1,"src":"shellyplus1-a8032abcf5f0","dst":"shellies_discovery","result":{"mqtt":{"enable":True,"topic_prefix":"shellyplus1-a8032abcf5f0","rpc_ntf":True,"status_ntf":True,"use_client_cert":False},"sys":{"device":{"name":None,"mac":"A8032ABCF5F0","fw_id":"20221206-141227/0.12.0-gafc2404","discoverable":True,"eco_mode":False,"addon_type":None}}}}
+   settings.shque.append("shellyplus2pm-a8032abcf5f0")
+   settings.shjsons["shellyplus2pm-a8032abcf5f0"] = {"id":1,"src":"shellyplus2pm-a8032abcf5f0","dst":"shellies_discovery","result":{"mqtt":{"enable":True,"topic_prefix":"shellyplus2pm-a8032abcf5f0","rpc_ntf":True,"status_ntf":True,"use_client_cert":False},"sys":{"device":{"name":None,"mac":"A8032ABCF5F0","fw_id":"20221206-141227/0.12.0-gafc2404","discoverable":True,"eco_mode":False,"addon_type":None}}}}
+#   settings.shque.append("shellyplus1-a8032abcf5f0")
+#   settings.shjsons["shellyplus1-a8032abcf5f0"] = {"id":1,"src":"shellyplus1-a8032abcf5f0","dst":"shellies_discovery","result":{"mqtt":{"enable":True,"topic_prefix":"shellyplus1-a8032abcf5f0","rpc_ntf":True,"status_ntf":True,"use_client_cert":False},"sys":{"device":{"name":None,"mac":"A8032ABCF5F0","fw_id":"20221206-141227/0.12.0-gafc2404","discoverable":True,"eco_mode":False,"addon_type":None}}}}
 
  if app is not None:
     app.update()
