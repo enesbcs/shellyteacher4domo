@@ -501,3 +501,19 @@ topic=%discovery_prefix%/select/%shelly_id%/gas_state/config
 payload={"name": "%shelly_id% Gas", "stat_t": "~sensor/gas", "cmd_t": "~dummy", "enabled_by_default": true, "uniq_id": "%shelly_id%-gasstate", "~": "shellies/%shelly_id%/", "dev_cla": "event", "stat_cla": "selector" , "ops":["unknown","none","mild","heavy","test"] }
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
 payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "shellies/%shelly_id%/", "pl_on": "true", "pl_off": "false"}
+
+[SHTRV-01] # Shelly TRV
+topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
+payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "shellies/%shelly_id%/", "pl_on": "true", "pl_off": "false"}
+topic=%discovery_prefix%/climate/%shelly_id%/config
+payload={"name": "%shelly_id% Climate","~":"shellies/%shelly_id%/","temperature_command_topic": "~thermostat/0/command/target_t","temperature_state_topic": "~info","temperature_state_template": "{{ value_json.thermostats[0].target_t.value}}","current_temperature_topic": "~info","current_temperature_template": "{{ value_json.thermostats[0].tmp.value }}","temperature_unit": "C","precision": 0.1,"temp_step": 0.5,"max_temp": 31,"min_temp": 4,"icon": "mdi:thermostat","unique_id": "%shelly_id%","device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}}
+topic=%discovery_prefix%/sensor/%shelly_id%/battery/config
+payload={"name": "%shelly_id% Battery", "~": "shellies/%shelly_id%/", "stat_t": "~info", "uniq_id": "%shelly_id%-battery", "device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}, "entity_category": "diagnostic", "dev_cla": "battery", "stat_cla": "measurement", "unit_of_meas": "%", "val_tpl": "{{ value_json.bat.value }}"}
+topic=%discovery_prefix%/binary_sensor/%shelly_id%/charger/config
+payload={"name": "%shelly_id% Charger", "stat_t": "~info", "uniq_id": "%shelly_id%-charger", "~":"shellies/%shelly_id%/", "val_tpl": "{{ value_json.charger }}", "stat_off": "false","stat_on": "true"}
+topic=%discovery_prefix%/sensor/%shelly_id%/valve/config
+payload={"name": "%shelly_id% Valve Position", "~": "shellies/%shelly_id%/", "stat_t": "~info", "uniq_id": "%shelly_id%-pos", "device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}, "stat_cla": "measurement", "unit_of_meas": "%", "val_tpl": "{{ value_json.thermostats[0].pos }}"}
+topic=%discovery_prefix%/select/%shelly_id%/profile/config
+payload={"name": "%shelly_id% Schedule Profile", "stat_t": "~info", "cmd_t": "~thermostat/0/command/schedule_profile", "uniq_id": "%shelly_id%-profile", "stat_cla": "selector" , "ops":["-","1","2","3","4","5"], "~":"shellies/%shelly_id%/", "val_tpl": "{{ value_json.thermostats[0].schedule_profile }}"}
+topic=%discovery_prefix%/switch/%shelly_id%/schedule/config
+payload={"name": "%shelly_id% Schedule", "cmd_t": "~thermostat/0/command/schedule", "stat_t": "~info", "pl_off": "0", "pl_on": "1", "stat_on": "true", "stat_off": "false", "uniq_id": "%shelly_id%-schedule", "~":"shellies/%shelly_id%/", "val_tpl": "{{ value_json.thermostats[0].schedule }}"}
