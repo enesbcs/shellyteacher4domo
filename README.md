@@ -69,6 +69,7 @@ Gen1:
 - Shelly Gas
 - Shelly2LED
 - Shelly RGBW2 (*only with 4 channel white mode)
+- Shelly TRV (needs Domoticz 2023 beta 15515 or later)
 
 Gen2:
 - Shelly Plus 1 / 1PM
