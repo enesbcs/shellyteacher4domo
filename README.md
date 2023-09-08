@@ -84,5 +84,5 @@ Gen2:
 
 ## Known problems with devices
 - Every Gen1 RGB devices will not work (see https://github.com/enesbcs/shellyteacher4domo/issues/7)
-- Energy reporting needs at least Domoticz 2023 beta 15526 (watt-minute and watt-hour now supported, see https://github.com/enesbcs/shellyteacher4domo/issues/6)
+- Energy reporting needs at least Domoticz 2023 beta 15530 (watt-minute and watt-hour now supported, see https://github.com/enesbcs/shellyteacher4domo/issues/6)
 - Gen2 Cover needs local position fix on device [(* see position fix)](https://github.com/enesbcs/shellyteacher4domo/wiki/Shelly-2PM-Cover-Position)
