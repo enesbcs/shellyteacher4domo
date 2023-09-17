@@ -24,10 +24,12 @@ In case you want to save the configurations after rebooting, please make sure th
 
 If you are not familiar with linux console, please download the windows binary!
 ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ
+
 Windows and Linux x64 binary builds published and can be downloaded from releases:
 https://github.com/enesbcs/shellyteacher4domo/releases
 
 A GUI is also available when TKInter works, this is the default now, Console mode can be requested by specifying -c parameter at the command line!
+
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ## How to update the program
