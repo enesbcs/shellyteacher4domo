@@ -10,7 +10,7 @@ try:
  import paho.mqtt.client as mqtt #pip3 install paho-mqtt
  _mqttok = 1
 except Exception as e:
- printLn("MQTT import error: "+str(e))
+ print("MQTT import error: "+str(e)+"\nPlease install paho-mqtt!")
  _mqttok = 0
 try:
  import tkinter as tk
