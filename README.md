@@ -17,7 +17,7 @@ as the Domoticz and this program.
 
 ```
 sudo apt install python3-pip git
-pip3 install paho-mqtt
+sudo pip3 install paho-mqtt
 git clone https://github.com/enesbcs/shellyteacher4domo.git
 ```
 In case you want to save the configurations after rebooting, please make sure that MQTT broker [persistence settings](https://pagefault.blog/2020/02/05/how-to-set-up-persistent-storage-for-mosquitto-mqtt-broker/) configured correctly!
