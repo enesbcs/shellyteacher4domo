@@ -23,14 +23,14 @@ git clone https://github.com/enesbcs/shellyteacher4domo.git
 In case you want to save the configurations after rebooting, please make sure that MQTT broker [persistence settings](https://pagefault.blog/2020/02/05/how-to-set-up-persistent-storage-for-mosquitto-mqtt-broker/) configured correctly!
 
 If you are not familiar with linux console, please download the windows binary!
-ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ
+ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ
 
 Windows and Linux x64 binary builds published and can be downloaded from releases:
 https://github.com/enesbcs/shellyteacher4domo/releases
 
 A GUI is also available when TKInter works, this is the default now, Console mode can be requested by specifying -c parameter at the command line!
 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[![Youtube tutorial](https://img.youtube.com/vi/3PvYhFIsVN4/0.jpg)](https://www.youtube.com/watch?v=3PvYhFIsVN4)
 
 ## How to update the program
 First: backup your templates.txt files if you modified it, than:
