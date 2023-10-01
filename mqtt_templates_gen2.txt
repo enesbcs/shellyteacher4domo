@@ -12,6 +12,16 @@ topic=%discovery_prefix%/select/%shelly_id%/input_event-0/config
 payload={"name": "%shelly_topic% Input Event 0", "json_attributes_topic": "~events/rpc", "value_template":"{{value_json['params']['events'][0].event}}", "cmd_t": "~dummy", "frc_upd": "false", "enabled_by_default": false, "uniq_id": "%shelly_id%-event-0", "~":"%shelly_topic%/", "dev_cla": "event", "stat_cla": "selector" , "ops":["-","scheduled_restart","btn_down","btn_up","single_push","double_push","triple_push","long_push"] }
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
 payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "%shelly_topic%/", "pl_on": "true", "pl_off": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-0/temperature/config
+payload={"name": "%shelly_id% Temperature Ext0", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-100", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:100", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false","device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-ext-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-0/humidity/config
+payload={"name": "%shelly_id% Humidity Ext0", "enabled_by_default": false, "uniq_id": "%shelly_id%-humidity-100", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "humidity", "stat_cla": "measurement", "unit_of_meas": "%","stat_t": "~status/humidity:100", "val_tpl": "{{ value_json.rh }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false","device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-ext-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-1/temperature/config
+payload={"name": "%shelly_id% Temperature Ext1", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-101", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:101", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-2/temperature/config
+payload={"name": "%shelly_id% Temperature Ext2", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-102", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:102", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext/voltage/config
+payload={"name": "%shelly_id% Addon Voltmeter 0", "~": "%shelly_topic%/", "stat_t": "~status/voltmeter:100", "enabled_by_default": false, "uniq_id": "%shelly_id%-ext-voltmeter", "qos": 0, "dev_cla": "voltage", "stat_cla": "measurement", "unit_of_meas": "V", "val_tpl": "{{ value_json.voltage }}"}
 
 [shellyplus1pm] # Shelly Plus 1PM
 topic=%discovery_prefix%/switch/%shelly_id%-0/config
@@ -30,6 +40,16 @@ topic=%discovery_prefix%/select/%shelly_id%/input_event-0/config
 payload={"name": "%shelly_topic% Input Event 0", "json_attributes_topic": "~events/rpc", "value_template":"{{value_json['params']['events'][0].event}}", "cmd_t": "~dummy", "frc_upd": "false", "enabled_by_default": false, "uniq_id": "%shelly_id%-event-0", "~":"%shelly_topic%/", "dev_cla": "event", "stat_cla": "selector" , "ops":["-","scheduled_restart","btn_down","btn_up","single_push","double_push","triple_push","long_push"] }
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
 payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "%shelly_topic%/", "pl_on": "true", "pl_off": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-0/temperature/config
+payload={"name": "%shelly_id% Temperature Ext0", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-100", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:100", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false","device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-ext-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-0/humidity/config
+payload={"name": "%shelly_id% Humidity Ext0", "enabled_by_default": false, "uniq_id": "%shelly_id%-humidity-100", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "humidity", "stat_cla": "measurement", "unit_of_meas": "%","stat_t": "~status/humidity:100", "val_tpl": "{{ value_json.rh }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false","device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-ext-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-1/temperature/config
+payload={"name": "%shelly_id% Temperature Ext1", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-101", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:101", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-2/temperature/config
+payload={"name": "%shelly_id% Temperature Ext2", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-102", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:102", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext/voltage/config
+payload={"name": "%shelly_id% Addon Voltmeter 0", "~": "%shelly_topic%/", "stat_t": "~status/voltmeter:100", "enabled_by_default": false, "uniq_id": "%shelly_id%-ext-voltmeter", "qos": 0, "dev_cla": "voltage", "stat_cla": "measurement", "unit_of_meas": "V", "val_tpl": "{{ value_json.voltage }}"}
 
 [shellyplus2pm] # Shelly Plus 2PM
 topic=%discovery_prefix%/switch/%shelly_id%-0/config
@@ -70,6 +90,16 @@ topic=%discovery_prefix%/sensor/%shelly_id%-roller-0/energy/config
 payload={"name": "%shelly_id% Roller Energy 0", "stat_t": "~status/cover:0", "frc_upd": "false", "enabled_by_default": false, "uniq_id": "%shelly_id%-roller-0-energy", "qos": 0, "~": "%shelly_topic%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{ value_json['aenergy'].total }}", "device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-roller-0"}}
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
 payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "%shelly_topic%/", "pl_on": "true", "pl_off": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-0/temperature/config
+payload={"name": "%shelly_id% Temperature Ext0", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-100", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:100", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false","device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-ext-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-0/humidity/config
+payload={"name": "%shelly_id% Humidity Ext0", "enabled_by_default": false, "uniq_id": "%shelly_id%-humidity-100", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "humidity", "stat_cla": "measurement", "unit_of_meas": "%","stat_t": "~status/humidity:100", "val_tpl": "{{ value_json.rh }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false","device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-ext-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-1/temperature/config
+payload={"name": "%shelly_id% Temperature Ext1", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-101", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:101", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-2/temperature/config
+payload={"name": "%shelly_id% Temperature Ext2", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-102", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:102", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext/voltage/config
+payload={"name": "%shelly_id% Addon Voltmeter 0", "~": "%shelly_topic%/", "stat_t": "~status/voltmeter:100", "enabled_by_default": false, "uniq_id": "%shelly_id%-ext-voltmeter", "qos": 0, "dev_cla": "voltage", "stat_cla": "measurement", "unit_of_meas": "V", "val_tpl": "{{ value_json.voltage }}"}
 
 [shellyplusht] # Shelly Plus H&T
 topic=%discovery_prefix%/sensor/%shelly_id%/RSSI/config
@@ -110,6 +140,16 @@ topic=%discovery_prefix%/binary_sensor/%shelly_id%-3/input/config
 payload={"name": "%shelly_topic% Input 3", "val_tpl": "{{ value_json.state }}","stat_off": "false","stat_on": "true","enabled_by_default": true, "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-3-input", "qos": 0, "device": {"identifiers": ["%shelly_mac%-3"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-3"}, "~": "%shelly_topic%/", "stat_t": "~status/input:3"}
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
 payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "%shelly_topic%/", "pl_on": "true", "pl_off": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-0/temperature/config
+payload={"name": "%shelly_id% Temperature Ext0", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-100", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:100", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false","device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-ext-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-0/humidity/config
+payload={"name": "%shelly_id% Humidity Ext0", "enabled_by_default": false, "uniq_id": "%shelly_id%-humidity-100", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "humidity", "stat_cla": "measurement", "unit_of_meas": "%","stat_t": "~status/humidity:100", "val_tpl": "{{ value_json.rh }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false","device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-ext-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-1/temperature/config
+payload={"name": "%shelly_id% Temperature Ext1", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-101", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:101", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext-2/temperature/config
+payload={"name": "%shelly_id% Temperature Ext2", "enabled_by_default": false, "uniq_id": "%shelly_id%-temperature-102", "qos": 0, "~":"%shelly_topic%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "°C","stat_t": "~status/temperature:102", "val_tpl": "{{ value_json.tC }}", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
+topic=%discovery_prefix%/sensor/%shelly_id%-ext/voltage/config
+payload={"name": "%shelly_id% Addon Voltmeter 0", "~": "%shelly_topic%/", "stat_t": "~status/voltmeter:100", "enabled_by_default": false, "uniq_id": "%shelly_id%-ext-voltmeter", "qos": 0, "dev_cla": "voltage", "stat_cla": "measurement", "unit_of_meas": "V", "val_tpl": "{{ value_json.voltage }}"}
 
 [shellypro1] # Shelly Pro 1
 topic=%discovery_prefix%/switch/%shelly_id%-0/config
