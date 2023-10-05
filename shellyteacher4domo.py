@@ -580,8 +580,14 @@ while loopok:
          printLn(">>>GEN2 device "+str(di["shelly_id"])+" "+str(di["shelly_topic"])+" found")
 
          for i in range(len(mt)):
-            mqttstr = {"topic": fill_template_str(mt[i]['topic'], di),"payload": fill_template_str(mt[i]['payload'], di)}
-            settings.mqttsender.append(mqttstr)
+           try:
+            if 'topic' in mt[i] and 'payload' in mt[i]:
+             mqttstr = {"topic": fill_template_str(mt[i]['topic'], di),"payload": fill_template_str(mt[i]['payload'], di)}
+             settings.mqttsender.append(mqttstr)
+            else:
+             printLn("Template file error "+str(mt[i]))
+           except Exception as e:
+            printLn(str(e))
         else:
          printLn("---ERROR: GEN2 device "+str(di["shelly_id"])+" "+str(di["shelly_topic"])+" template not found")
 
@@ -617,8 +623,14 @@ while loopok:
          printLn(">>>GEN1 device "+str(di["shelly_ip"])+" "+str(model)+" "+str(di["shelly_id"])+" found")
 
          for i in range(len(mt)):
-            mqttstr = {"topic": fill_template_str(mt[i]['topic'], di),"payload": fill_template_str(mt[i]['payload'], di)}
-            settings.mqttsender.append(mqttstr)
+           try:
+            if 'topic' in mt[i] and 'payload' in mt[i]:
+             mqttstr = {"topic": fill_template_str(mt[i]['topic'], di),"payload": fill_template_str(mt[i]['payload'], di)}
+             settings.mqttsender.append(mqttstr)
+            else:
+             printLn("Template file error "+str(mt[i]))
+           except Exception as e:
+            printLn(str(e))
         else:
          printLn("---ERROR: GEN1 device "+str(di["shelly_ip"])+" "+str(model)+" "+str(di["shelly_id"])+" template not found")
 
