@@ -251,7 +251,7 @@ payload={"name": "%shelly_id% Voltage 3", "~": "%shelly_topic%/", "stat_t": "~st
 topic=%discovery_prefix%/sensor/%shelly_id%-3/power/config
 payload={"name": "%shelly_id% Power 3", "stat_t": "~status/switch:3", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-3-power", "qos": 0, "~": "%shelly_topic%/", "dev_cla": "power", "stat_cla": "measurement", "unit_of_meas": "W", "val_tpl": "{{ value_json.apower }}", "device": {"identifiers": ["%shelly_mac%-3"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-3"}}
 topic=%discovery_prefix%/sensor/%shelly_id%-3/energy/config
-payload={"name": "%shelly_id% Energy 3", "stat_t": "~status/switch:3", "frc_upd": "false", "uniq_id": "%shelly_id%-2-energy", "qos": 0, "~": "%shelly_topic%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{ value_json['aenergy'].total }}", "device": {"identifiers": ["%shelly_mac%-3"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-3"}}
+payload={"name": "%shelly_id% Energy 3", "stat_t": "~status/switch:3", "frc_upd": "false", "uniq_id": "%shelly_id%-3-energy", "qos": 0, "~": "%shelly_topic%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{ value_json['aenergy'].total }}", "device": {"identifiers": ["%shelly_mac%-3"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-3"}}
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
 payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "%shelly_topic%/", "pl_on": "true", "pl_off": "false"}
 
