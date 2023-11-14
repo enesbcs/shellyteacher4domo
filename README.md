@@ -17,9 +17,11 @@ as the Domoticz and this program.
 
 ```
 sudo apt install python3-pip git
-sudo pip3 install paho-mqtt
+sudo pip3 install paho-mqtt --break-system-packages
 git clone https://github.com/enesbcs/shellyteacher4domo.git
 ```
+In case you are using Debian 12, please remove 'EXTERNALLY-MANAGED' file from your system to be able to use pip3. https://www.jeffgeerling.com/blog/2023/how-solve-error-externally-managed-environment-when-installing-pip3
+
 In case you want to save the configurations after rebooting, please make sure that MQTT broker [persistence settings](https://pagefault.blog/2020/02/05/how-to-set-up-persistent-storage-for-mosquitto-mqtt-broker/) configured correctly!
 
 If you are not familiar with linux console, please download the windows binary!
