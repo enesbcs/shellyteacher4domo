@@ -15,6 +15,11 @@ as the Domoticz and this program.
 
 ## How to install
 
+1. Please use the precompiled windows binary if you are not familiar with Linux:
+   https://github.com/enesbcs/shellyteacher4domo/releases
+
+3. For Linux users for any platform that capable to run python3:
+
 ```
 sudo apt install python3-pip git
 sudo pip3 install paho-mqtt
@@ -27,7 +32,7 @@ sudo pip3 install paho-mqtt --break-system-packages
 
 In case you want to save the configurations after rebooting, please make sure that MQTT broker [persistence settings](https://pagefault.blog/2020/02/05/how-to-set-up-persistent-storage-for-mosquitto-mqtt-broker/) configured correctly!
 
-If you are not familiar with linux console, please download the windows binary!
+In case you are unable to install or run the program, please download the windows binary!
 ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ
 
 Windows and Linux x64 binary builds published and can be downloaded from releases:
