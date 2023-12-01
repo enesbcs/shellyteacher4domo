@@ -18,6 +18,8 @@ as the Domoticz and this program.
 1. Please use the precompiled windows binary if you are not familiar with Linux:
    https://github.com/enesbcs/shellyteacher4domo/releases
 
+   > The Teacher can be run on ANY machine on the network, which accessing the MQTT IP addres, does not need to run on the Domoticz server directly!!!
+
 3. For Linux users for any platform that capable to run python3:
 
 ```
