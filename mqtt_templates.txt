@@ -98,6 +98,8 @@ payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_
 [SHSW-21-roller][SHSW-25-roller]   #Shelly 2 / Shelly 2.5 roller mode
 topic=%discovery_prefix%/cover/%shelly_id%-roller-0/config
 payload={"name": "%shelly_id% Roller 0", "cmd_t": "~roller/0/command", "stat_t": "~roller/0", "pos_t": "~roller/0/pos", "set_pos_t": "~roller/0/command/pos", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "json_attr_t": "~info", "pl_open": "open", "pl_cls": "close", "pl_stop": "stop", "stat_opening": "open", "stat_closing": "close", "pos_open": 100, "pos_clsd": 0, "uniq_id": "%shelly_id%-roller-0", "qos": 1, "~": "shellies/%shelly_id%/"}
+topic=%discovery_prefix%/select/%shelly_id%/cover-control/config
+payload={"name": "%shelly_id% Cover Control", "~": "shellies/%shelly_id%/", "uniq_id": "%shelly_id%-0-covercontrol", "enabled_by_default": false, "cmd_t": "~roller/0/command", "stat_t": "~roller/0", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false","stat_cla": "selector", "ops":["stop","close","open"] }
 topic=%discovery_prefix%/sensor/%shelly_id%/energy/config
 payload={"name": "%shelly_id% Roller 0 Energy", "stat_t": "~roller/0/energy", "frc_upd": "false", "uniq_id": "%shelly_id%-roller-0-energy", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wm", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false","device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}}
 topic=%discovery_prefix%/sensor/%shelly_id%/power/config

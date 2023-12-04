@@ -296,3 +296,23 @@ topic=%discovery_prefix%/sensor/%shelly_id%-C/retenergy/config
 payload={"name": "%shelly_id% Phase C Total Returned Energy", "stat_t": "~status/emdata:0", "enabled_by_default": true, "uniq_id": "%shelly_id%-C-retenergy", "qos": 0, "~": "%shelly_topic%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{ value_json.c_total_act_ret_energy|round(2) }}", "device": {"identifiers": ["%shelly_mac%-C"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-C"}}
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
 payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "%shelly_topic%/", "pl_on": "true", "pl_off": "false"}
+
+[shellypmmini] # Shelly Plus PM Mini
+topic=%discovery_prefix%/sensor/%shelly_id%-0/voltage/config
+payload={"name": "%shelly_id% 0 Voltage", "~": "%shelly_topic%/", "stat_t": "~status/pm1:0", "enabled_by_default": true, "uniq_id": "%shelly_id%-0-voltage", "qos": 0, "dev_cla": "voltage", "stat_cla": "measurement", "unit_of_meas": "V", "val_tpl": "{{ value_json.voltage }}", "device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-0/power/config
+payload={"name": "%shelly_id% 0 Active Power", "stat_t": "~status/pm1:0", "enabled_by_default": true, "uniq_id": "%shelly_id%-0-power", "qos": 0, "~": "%shelly_topic%/", "dev_cla": "power", "stat_cla": "measurement", "unit_of_meas": "W", "val_tpl": "{{ value_json.apower }}", "device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-0/appower/config
+payload={"name": "%shelly_id% 0 Apparent Power", "stat_t": "~status/pm1:0", "enabled_by_default": true, "uniq_id": "%shelly_id%-0-appower", "qos": 0, "~": "%shelly_topic%/", "dev_cla": "power", "stat_cla": "measurement", "unit_of_meas": "VA", "val_tpl": "{{ value_json.aprtpower }}", "device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-0/energy/config
+payload={"name": "%shelly_id% 0 Active Energy", "stat_t": "~status/pm1:0", "enabled_by_default": true, "uniq_id": "%shelly_id%-0-energy", "qos": 0, "~": "%shelly_topic%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{ value_json.aenergy.total }}", "device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-0/retenergy/config
+payload={"name": "%shelly_id% 0 Returned Energy", "stat_t": "~status/pm1:0", "enabled_by_default": true, "uniq_id": "%shelly_id%-0-retenergy", "qos": 0, "~": "%shelly_topic%/", "dev_cla": "energy", "stat_cla": "total_increasing", "unit_of_meas": "Wh", "val_tpl": "{{ value_json.ret_aenergy.total }}", "device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-0/pf/config
+payload={"name": "%shelly_id% 0 Power Factor", "stat_t": "~status/pm1:0", "enabled_by_default": true, "uniq_id": "%shelly_id%-0-pf", "qos": 0, "~": "%shelly_topic%/", "dev_cla": "power_factor",  "val_tpl": "{{ value_json.pf }}", "device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-0/freq/config
+payload={"name": "%shelly_id% 0 Freq", "~": "%shelly_topic%/", "stat_t": "~/status/pm1:0", "enabled_by_default": true, "uniq_id": "%shelly_id%-0-freq", "qos": 0, "dev_cla": "frequency", "stat_cla": "measurement", "unit_of_meas": "Hz", "val_tpl": "{{ value_json.freq }}", "device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-0"}}
+topic=%discovery_prefix%/sensor/%shelly_id%-0/current/config
+payload={"name": "%shelly_id% 0 Current", "~": "%shelly_topic%/", "stat_t": "~status/pm1:0", "enabled_by_default": true, "uniq_id": "%shelly_id%-0-current", "qos": 0, "dev_cla": "current", "stat_cla": "measurement", "unit_of_meas": "A", "val_tpl": "{{ value_json.current }}", "device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-0"}}
+topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
+payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "%shelly_topic%/", "pl_on": "true", "pl_off": "false"}
