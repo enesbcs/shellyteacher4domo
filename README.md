@@ -44,6 +44,8 @@ A GUI is also available when TKInter works, this is the default now, Console mod
 
 [![Youtube tutorial](https://img.youtube.com/vi/3PvYhFIsVN4/0.jpg)](https://www.youtube.com/watch?v=3PvYhFIsVN4)
 
+HINT: If you have to add multiple Shelly devices to MQTT, you can use [Shelly Scanner](https://www.usna.it/shellyscanner/index_en.html) app to set MQTT on them.
+
 ## How to update the program
 First: backup your templates.txt files if you modified it, than:
 ```
