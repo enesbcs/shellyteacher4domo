@@ -163,7 +163,7 @@ class MQTTClientOnlineCheck(mqtt.Client): #Gen2 hack to get some infos...
     topic = ""
    if "true" in msg2:
      t = topic.split("/")
-     sid = t[0]
+     sid = topic.replace("/"+t[-1],"")
      printLn("ONLINE GEN2 "+str(sid))
      nmsg = { "topic": sid + '/rpc', "payload": '{"id": 1, "src":"shellies_discovery", "method":"Shelly.GetConfig"}' } # force gen2 device to properly identify itself... OMG
      settings.mqttsender.append(nmsg)
@@ -514,6 +514,18 @@ def connect_mqtt():
       mqttclient3.username_pw_set(settings.data['mqtt_user'],settings.data['mqtt_pass'])
      mqttclient3.connect(settings.data['mqtt_ip'],int(settings.data['mqtt_port']),keepalive=60)
      mqttclient3.loop_start()
+     loopok2 = True
+   except Exception as e:
+     printLn("Connection failed! "+str(e))
+   mqttclient4 = MQTTClientOnlineCheck() #gen2 online
+   mqttclient4.subscribechannel = settings.data['trigger_topic4']
+   printLn("Connecting to MQTT server...")
+   loopok2 = False
+   try:
+     if settings.data['mqtt_user'] != "" or settings.data['mqtt_pass'] != "":
+      mqttclient4.username_pw_set(settings.data['mqtt_user'],settings.data['mqtt_pass'])
+     mqttclient4.connect(settings.data['mqtt_ip'],int(settings.data['mqtt_port']),keepalive=60)
+     mqttclient4.loop_start()
      loopok2 = True
    except Exception as e:
      printLn("Connection failed! "+str(e))
