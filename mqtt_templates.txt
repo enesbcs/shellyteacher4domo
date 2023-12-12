@@ -486,7 +486,7 @@ payload={"name": "%shelly_id% LED 1", "cmd_t": "~color/1/set", "stat_t": "~color
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
 payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "shellies/%shelly_id%/", "pl_on": "true", "pl_off": "false"}
 
-[SHSM-01] # Shelly Smoke
+[SHSM-1][SHSM-01] # Shelly Smoke
 topic=%discovery_prefix%/sensor/%shelly_id%-temperature/config
 payload={"name": "%shelly_id% Temperature", "stat_t": "~sensor/temperature", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-temperature", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "C", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
 topic=%discovery_prefix%/sensor/%shelly_id%/battery/config
@@ -496,7 +496,7 @@ payload={"name": "%shelly_id% Smoke", "stat_t": "~sensor/smoke", "enabled_by_def
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
 payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "shellies/%shelly_id%/", "pl_on": "true", "pl_off": "false"}
 
-[SHWT-01] # Shelly Flood
+[SHWT-1][SHWT-01] # Shelly Flood
 topic=%discovery_prefix%/sensor/%shelly_id%-temperature/config
 payload={"name": "%shelly_id% Temperature", "stat_t": "~sensor/temperature", "frc_upd": "false", "enabled_by_default": true, "uniq_id": "%shelly_id%-temperature", "qos": 0, "~": "shellies/%shelly_id%/", "dev_cla": "temperature", "stat_cla": "measurement", "unit_of_meas": "C", "avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false"}
 topic=%discovery_prefix%/sensor/%shelly_id%/battery/config
