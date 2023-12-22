@@ -96,14 +96,15 @@ Gen1:
 - Shelly TRV (needs Domoticz 2023 beta 15515 or later)
 
 Gen2:
-- Shelly Plus 1 / 1PM
+- Shelly Plus 1 / 1PM / 1 Mini / 1PM Mini
+- Shelly PM Mini
 - Shelly Plus 2PM [(* see position fix)](https://github.com/enesbcs/shellyteacher4domo/wiki/Shelly-2PM-Cover-Position)
 - Shelly Plus Plug
 - Shelly Plus H&T
 - Shelly Plus I4
 - Shelly Pro 1 / 1PM
 - Shelly Pro 2
-- Shelly Pro 3
+- Shelly Pro 3 / 3EM
 - Shelly Pro 4PM
 
 ## Known problems with devices
