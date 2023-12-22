@@ -106,6 +106,7 @@ Gen2:
 - Shelly Pro 2
 - Shelly Pro 3 / 3EM
 - Shelly Pro 4PM
+- Shelly Pro Dual Cover PM
 
 ## Known problems with devices
 - Every Gen1 RGB devices will not work (see https://github.com/enesbcs/shellyteacher4domo/issues/7)
