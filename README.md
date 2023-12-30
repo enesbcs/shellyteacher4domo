@@ -103,7 +103,7 @@ Gen2:
 - Shelly Plus H&T
 - Shelly Plus I4
 - Shelly Pro 1 / 1PM
-- Shelly Pro 2
+- Shelly Pro 2 / 2PM [(* see position fix)](https://github.com/enesbcs/shellyteacher4domo/wiki/Shelly-2PM-Cover-Position)
 - Shelly Pro 3 / 3EM
 - Shelly Pro 4PM
 - Shelly Pro Dual Cover PM
