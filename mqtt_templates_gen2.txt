@@ -1,7 +1,7 @@
 # Usable template keywords:
 #  discovery_prefix, shelly_topic, shelly_id, shelly_model, shelly_mac
 #
-[shellyplus1][shelly1mini] # Shelly Plus 1
+[shellyplus1][shelly1mini][shelly1minig3] # Shelly Plus 1
 topic=%discovery_prefix%/switch/%shelly_id%-0/config
 payload={"name": "%shelly_topic% Relay 0", "cmd_t": "~rpc", "pl_off": "{\"id\":1,\"src\":\"%shelly_id%\",\"method\":\"Switch.Set\",\"params\":{\"id\":0,\"on\":false}}", "pl_on": "{\"id\":1,\"src\":\"%shelly_id%\",\"method\":\"Switch.Set\",\"params\":{\"id\":0,\"on\":true}}", "stat_t": "~status/switch:0", "val_tpl": "{{ value_json.output }}","stat_off": "false","stat_on": "true","avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-0", "qos": 0, "device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}, "~": "%shelly_topic%/"}
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-0/input/config
@@ -25,7 +25,7 @@ payload={"name": "%shelly_id% Temperature Ext2", "enabled_by_default": false, "u
 topic=%discovery_prefix%/sensor/%shelly_id%-ext/voltage/config
 payload={"name": "%shelly_id% Addon Voltmeter 0", "~": "%shelly_topic%/", "stat_t": "~status/voltmeter:100", "enabled_by_default": false, "uniq_id": "%shelly_id%-ext-voltmeter", "qos": 0, "dev_cla": "voltage", "stat_cla": "measurement", "unit_of_meas": "V", "val_tpl": "{{ value_json.voltage }}"}
 
-[shellyplus1pm][shelly1pmmini] # Shelly Plus 1PM
+[shellyplus1pm][shelly1pmmini][shelly1pmminig3] # Shelly Plus 1PM
 topic=%discovery_prefix%/switch/%shelly_id%-0/config
 payload={"name": "%shelly_topic% Relay 0", "cmd_t": "~rpc", "pl_off": "{\"id\":1,\"src\":\"%shelly_id%\",\"method\":\"Switch.Set\",\"params\":{\"id\":0,\"on\":false}}", "pl_on": "{\"id\":1,\"src\":\"%shelly_id%\",\"method\":\"Switch.Set\",\"params\":{\"id\":0,\"on\":true}}", "stat_t": "~status/switch:0", "val_tpl": "{{ value_json.output }}","stat_off": "false","stat_on": "true","avty_t": "~online", "pl_avail": "true", "pl_not_avail": "false", "uniq_id": "%shelly_id%-0", "qos": 0, "device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"}, "~": "%shelly_topic%/"}
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-0/input/config
@@ -109,7 +109,7 @@ payload={"name": "%shelly_id% Temperature Ext2", "enabled_by_default": false, "u
 topic=%discovery_prefix%/sensor/%shelly_id%-ext/voltage/config
 payload={"name": "%shelly_id% Addon Voltmeter 0", "~": "%shelly_topic%/", "stat_t": "~status/voltmeter:100", "enabled_by_default": false, "uniq_id": "%shelly_id%-ext-voltmeter", "qos": 0, "dev_cla": "voltage", "stat_cla": "measurement", "unit_of_meas": "V", "val_tpl": "{{ value_json.voltage }}"}
 
-[shellyplusht] # Shelly Plus H&T
+[shellyplusht][shellyhtg3] # Shelly Plus H&T
 topic=%discovery_prefix%/sensor/%shelly_id%/RSSI/config
 payload={"device": {"identifiers": ["%shelly_mac%"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%"},"dev_cla": "signal_strength","enabled_by_default":true,"entity_category":"diagnostic","~": "%shelly_topic%/","json_attributes_topic":"~status/wifi","name": "%shelly_id% WiFi Signal","state_class":"measurement","state_topic":"~status/wifi","unique_id":"%shelly_id%-rssi","unit_of_measurement":"dBm","value_template":"{{ value_json.rssi }}","icon": "mdi:signal"}
 topic=%discovery_prefix%/sensor/%shelly_id%/battery/config
@@ -347,7 +347,7 @@ payload={"name": "%shelly_id% Phase C Total Returned Energy", "stat_t": "~status
 topic=%discovery_prefix%/binary_sensor/%shelly_id%-online/config
 payload={"name": "%shelly_id% Online", "stat_t": "~online", "uniq_id": "%shelly_id%-online", "~": "%shelly_topic%/", "pl_on": "true", "pl_off": "false"}
 
-[shellypmmini] # Shelly Plus PM Mini
+[shellypmmini][shellypmminig3] # Shelly Plus PM Mini
 topic=%discovery_prefix%/sensor/%shelly_id%-0/voltage/config
 payload={"name": "%shelly_id% 0 Voltage", "~": "%shelly_topic%/", "stat_t": "~status/pm1:0", "enabled_by_default": true, "uniq_id": "%shelly_id%-0-voltage", "qos": 0, "dev_cla": "voltage", "stat_cla": "measurement", "unit_of_meas": "V", "val_tpl": "{{ value_json.voltage }}", "device": {"identifiers": ["%shelly_mac%-0"],"manufacturer": "Shelly","model": "%shelly_model%","name": "%shelly_id%-0"}}
 topic=%discovery_prefix%/sensor/%shelly_id%-0/power/config
