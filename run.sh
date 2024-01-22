@@ -2,8 +2,9 @@
 FILE=/etc/mosquitto/mosquitto.conf
 #Checking if the script running on the server itself...
 if [ -f "$FILE" ]; then
+   SUDO=`command -v sudo`
    echo "Mosquitto conf found. "
-   _MOSQ=`cat $FILE | grep persistence | grep true`
+   _MOSQ=`$SUDO cat $FILE | grep persistence | grep true`
    if [ -z "$_MOSQ" ]
    then
      echo "persistence DISABLED - RETAIN settings wont survive reboot!"

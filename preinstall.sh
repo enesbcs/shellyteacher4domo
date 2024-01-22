@@ -1,16 +1,17 @@
 #!/bin/bash
 echo "ShellyTeacher dependency solver"
+echo "-------------------------------"
 DISPLAY=`printenv DISPLAY`
-SUDO=`command -v sudo`
-_SYSTEM=""
-if [ "$(id -u)" -eq 0 ]; then
-  echo "Virtualenv only installs packages to the actual user!"
-  exit
-fi
 if [ -z `command -v command` ]
 then
    echo "Command not found!"
    exit
+fi
+_SUDO=`command -v sudo`
+_SYSTEM=""
+_ROOT=""
+if [ "$(id -u)" -eq 0 ]; then
+  _ROOT="y"
 fi
 if [ ! -z `command -v apt-get` ]
 then
@@ -25,46 +26,71 @@ else
    echo "Not supported system!"
    exit
 fi
-
+echo "If you are not root, the system may now ask root password several times. (You may consider to use sudo)"
 if [ "$_SYSTEM" = "apt-get" ]
 then
-  if [ ! -z `command -v sudo` ]
+  if [ ! -z "$_SUDO" ]
   then
    _SYSTEM="sudo $_SYSTEM"
   fi
-  $_SYSTEM update
-  $_SYSTEM install -y python3 python3-pip python3-venv
-  if [ ! -z "$DISPLAY" ]
-  then
-   $_SYSTEM install -y python3-tk
+  if [ -z "$_SUDO" ] && [ -z "$_ROOT" ]; then
+   su - root -c "$_SYSTEM update ; $_SYSTEM install -y python3 python3-pip python3-venv"
+   if [ ! -z "$DISPLAY" ]
+   then
+    su - root -c "$_SYSTEM install -y python3-tk"
+   fi
+  else
+   $_SYSTEM update
+   $_SYSTEM install -y python3 python3-pip python3-venv
+   if [ ! -z "$DISPLAY" ]
+   then
+    $_SYSTEM install -y python3-tk
+   fi
   fi
 fi
 if [ "$_SYSTEM" = "pacman" ]
 then
-  if [ ! -z `command -v sudo` ]
+  if [ ! -z "$_SUDO" ]
   then
    _SYSTEM="sudo $_SYSTEM"
   fi
-  echo -ne '\n' | $_SYSTEM -S python python-pip
-  if [ ! -z "$DISPLAY" ]
-  then
-   echo -ne '\n' | $_SYSTEM -S tk
+  if [ -z "$_SUDO" ] && [ -z "$_ROOT" ]; then
+   su - root -c "echo -ne '\n' | $_SYSTEM -S python python-pip"
+   if [ ! -z "$DISPLAY" ]
+   then
+    su - root -c "echo -ne '\n' | $_SYSTEM -S tk"
+   fi
+  else
+   echo -ne '\n' | $_SYSTEM -S python python-pip
+   if [ ! -z "$DISPLAY" ]
+   then
+    echo -ne '\n' | $_SYSTEM -S tk
+   fi
   fi
 fi
 if [ "$_SYSTEM" = "apk" ]
 then
   _SED="sed"
-  if [ ! -z `command -v sudo` ]
+  if [ ! -z "$_SUDO" ]
   then
    _SYSTEM="sudo $_SYSTEM"
    _SED="sudo sed"
   fi
-  _SED= -i '/community/s/^#//' /etc/apk/repositories
-  $_SYSTEM update
-  $_SYSTEM add python3 py3-pip
-  if [ ! -z "$DISPLAY" ]
-  then
-   $_SYSTEM add python3-tkinter
+  if [ -z "$_SUDO" ] && [ -z "$_ROOT" ]; then
+   su - root -c "$_SED -i '/community/s/^#//' /etc/apk/repositories"
+   su - root -c "$_SYSTEM update ; $_SYSTEM add python3 py3-pip"
+   if [ ! -z "$DISPLAY" ]
+   then
+    su - root -c "$_SYSTEM add python3-tkinter"
+   fi
+  else
+   $_SED -i '/community/s/^#//' /etc/apk/repositories
+   $_SYSTEM update
+   $_SYSTEM add python3 py3-pip
+   if [ ! -z "$DISPLAY" ]
+   then
+    $_SYSTEM add python3-tkinter
+   fi
   fi
 fi
 if [ ! -z `command -v python3` ]

@@ -15,26 +15,38 @@ as the Domoticz and this program.
 
 ## How to install
 
-1. Please use the precompiled windows binary if you are not familiar with Linux:
+A. Please use the precompiled windows binary if you are not familiar with Linux:
    https://github.com/enesbcs/shellyteacher4domo/releases
 
    > The Teacher can be run on ANY machine on the network, which accessing the MQTT IP addres, does not need to run on the Domoticz server directly!!!
 
-3. For Linux users for any platform that capable to run python3:
+B. For Linux users for any platform capable of running python3:
 
+-Install git (Debian/Ubuntu if user has root right)
 ```
-sudo apt install python3-pip git
-sudo pip3 install paho-mqtt
+apt install git
+```
+-OR install git (Debian/Ubuntu if user has sudo right)
+```
+sudo apt install git
+```
+-Download application with git
+```
 git clone https://github.com/enesbcs/shellyteacher4domo.git
 ```
-In case you are using Debian 12, please remove 'EXTERNALLY-MANAGED' file from your system to be able to use pip3. https://www.jeffgeerling.com/blog/2023/how-solve-error-externally-managed-environment-when-installing-pip3
+-Run the installation script first, and only once (which will deal python venv)
 ```
-sudo pip3 install paho-mqtt --break-system-packages
+cd shellyteacher4domo
+./preinstall.sh
+```
+-If installation was succesful, ShellyTeacher now can be run from the venv named 'paho' with this command:
+```
+./run.sh
 ```
 
 In case you want to save the configurations after rebooting, please make sure that MQTT broker [persistence settings](https://pagefault.blog/2020/02/05/how-to-set-up-persistent-storage-for-mosquitto-mqtt-broker/) configured correctly!
 
-In case you are unable to install or run the program, please download the windows binary!
+If you are unable to install or run the program, please download the windows binary!
 ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ
 
 Windows and Linux x64 binary builds published and can be downloaded from releases:
@@ -59,12 +71,12 @@ git pull
 3. Start Teacher
 ```
 cd shellyteacher4domo
-python3 shellyteacher4domo.py
+./run.sh
 ```
 4. Power Shelly device or restart it
 5. If Teacher finds the device ID in the mqtt_templates.txt, those will be automatically forwarded for the Discovery topic, and as the default publish method is 'RETAIN', it will survive reboot, and Teacher application is not needed to run, until you wants a new Shelly device to be installed
 
-(In case of Gen2 device, the device has to be started before the Teacher, and make sure to enable "Generic status update over MQTT" at MQTT settings page)
+(In case of Gen2/Gen3 device, the device has to be started before the Teacher, and make sure to enable "Generic status update over MQTT" at MQTT settings page)
 
 Windows and Linux x64 binary builds published and can be downloaded from releases:
 https://github.com/enesbcs/shellyteacher4domo/releases
@@ -108,7 +120,10 @@ Gen2:
 - Shelly Pro 4PM
 - Shelly Pro Dual Cover PM
 
+Gen3:
+- Shelly 1 Mini G3 / 1PM Mini G3
+- Shelly PM Mini G3
+- Shelly HT G3
+
 ## Known problems with devices
 - Every Gen1 RGB devices will not work (see https://github.com/enesbcs/shellyteacher4domo/issues/7)
-- Energy reporting needs at least Domoticz 2023 beta 15530 (watt-minute and watt-hour now supported, see https://github.com/enesbcs/shellyteacher4domo/issues/6)
-- Gen2 Cover needs local position fix on device [(* see position fix)](https://github.com/enesbcs/shellyteacher4domo/wiki/Shelly-2PM-Cover-Position)
