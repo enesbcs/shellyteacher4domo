@@ -19,6 +19,7 @@ try:
 except:
  _tkok = 0 # apt install python3-tk
  app = None
+from common import get_shelly, fill_template_str, TemplateDataFile, Tasmota_Discovery
 
 loopok          = True
 startprovision   = False
@@ -53,7 +54,7 @@ def saveSettings():
      printLn("Saving settings to ini file")
      if cfg.has_section("CONFIG")==False:
       cfg.add_section("CONFIG")
-     opts = ['mqtt_ip','mqtt_port','mqtt_user','mqtt_pass','discovery_prefix','testrun','retain','gen1','gen2','debug']
+     opts = ['mqtt_ip','mqtt_port','mqtt_user','mqtt_pass','discovery_prefix','testrun','retain','gen1','gen2','debug','tasmo']
      for o in opts:
       try:
        ovar = str(app.getvar(name=o))
@@ -168,119 +169,68 @@ class MQTTClientOnlineCheck(mqtt.Client): #Gen2 hack to get some infos...
      nmsg = { "topic": sid + '/rpc', "payload": '{"id": 1, "src":"shellies_discovery", "method":"Shelly.GetConfig"}' } # force gen2 device to properly identify itself... OMG
      settings.mqttsender.append(nmsg)
 
-def get_shelly(purl): #get infos through http
-  st = ""
-  sm = ""
-  rescode = 0
+class MQTTClientTasmo(mqtt.Client): # TasmotDiscovery detect
+ subscribechannel = ""
+
+ def _on_pre_connect(self, dummy1, dummy2):
+     pass
+
+ def on_connect(self, client, userdata, flags, rc):
   try:
-   content = urllib.request.urlopen("http://"+purl+"/settings", None, 2)
+   self.subscribe(self.subscribechannel,0)
+   if settings.debug:
+    printLn("subscribed "+str(self.subscribechannel))
   except Exception as e:
-   rescode = -1
-  if rescode == 0:
+   printLn("MQTT connection error: "+str(e))
+  try:
+   rc = int(rc)
+  except:
+   rc=-1
+  if rc !=0:
+   estr = str(rc)
+   if rc==1:
+      estr += " Protocol version error!"
+   if rc==3:
+      estr += " Server unavailable!"
+   if rc==4:
+      estr += " User/pass error!"
+   if rc==5:
+      estr += " Not authorized!"
+   printLn("MQTT connection error: "+estr)
+
+ def on_message(self, mqttc, obj, msg):
    try:
-    rescode = content.getcode()
+    tarr = msg.topic.split("/")
+    devid = tarr[-2]
+    ttype = tarr[-1]
    except Exception as e:
-    rescode = -1
-   if (rescode == 200):
+    print(e)
+    return
+   msg2 = msg.payload.decode('utf-8')
+   lista = []
+   if ('{' in msg2):
     try:
-     retdata = content.read()
-    except:
-     retdata = ""
-    msg2 = retdata.decode('utf-8')
-    if ('{' in msg2):
-     list = []
-     try:
-      list = json.loads(msg2)
-     except Exception as e:
-      printLn("JSON decode error: "+str(e)+" "+str(msg2))
-      list = []
-     if (list):
-      if 'device' in list:
-       if 'type' in list['device']:
-        st = str(list['device']['type'])
-      if 'fw_mode' in list:
-        sm = str(list['fw_mode'])
-      elif 'mode' in list:
-        sm = str(list['mode'])
-  return st, sm
+     lista = json.loads(msg2)
+    except Exception as e:
+     printLn("JSON decode error:"+str(e)+str(msg2))
+     lista = []
+   if (lista) and (len(lista)>0):
+     if settings.debug:
+      printLn( "on_message::payload::" + str(msg2))
+     if ("md" in lista) or ('sn' in lista): #tasmota config&sensors
+       if devid not in settings.shque:
+        settings.shque.append(devid)
+       if devid not in settings.shjsons:
+          settings.shjsons[devid] = {}
+       if ttype == 'config':
+        if 'config' not in settings.shjsons[devid]:
+          settings.shjsons[devid]['config'] = lista
+       elif ttype == 'sensors':
+        if 'sensors' not in settings.shjsons[devid]:
+          settings.shjsons[devid]['sensors'] = lista
+       printLn(str(devid)+" alive")
 
-def fill_template_str(template, values): # values = {"shelly_id": "shelly-xxxx", "shelly_mac": "abcdefgh"}
-   cline = template
-   if "%" in cline:
-    m = re.findall(r"\%([A-Za-z0-9_#\+\-]+)\%", cline)
-    if len(m)>0: # replace with values
-     for r in range(len(m)):
-      if m[r].lower() in values:
-       cline = cline.replace("%"+m[r]+"%",str(values[m[r]]))
-   return cline
-
-class TemplateDataFile:
-    f = None
-    template = {}
-    templatename = ""
-
-    def __init__(self, file_name):
-        try:
-         self.f = open(file_name, 'r')
-        except:
-         self.f = None
-         printLn( "ERROR: File open error: " + str(file_name))
-
-        self.template = []
-        self.templatename = ""
-
-    def close(self):
-        if self.f:
-            self.f.close()
-            self.f = None
-
-    def opened(self):
-        if (self.f is not None):
-         try:
-          return (self.f.closed == False)
-         except:
-          pass
-        return False
-
-    def get_templates(self,templatename):
-        tfs = False
-        tfe = False
-        self.templatename = ""
-        self.template = []
-        if self.f is not None:
-           self.f.seek(0, 0)
-           self.templatename = str(templatename)
-           try:
-            mt = {}
-            while True:
-             file_line = self.f.readline()
-             if not file_line:
-              break
-             # Skip the comment lines
-             if len( file_line.lstrip()) == 0 or file_line.lstrip()[0] == "#":
-               continue
-             if tfs==False and tfe==False: #searching model
-              if "["+ self.templatename + "]" in file_line:
-               tfs = True
-             elif tfs and tfe==False: # templatestr's
-               if file_line == "" or file_line[0] == "[":
-                tfe = True
-                break
-               file_line = file_line.strip()
-               equpos = file_line.find("=")
-               if equpos in [5,7]:
-                if file_line[:5]=="topic":
-                   mt['topic'] = file_line[(equpos+1):].strip()
-                elif file_line[:7]=="payload":
-                   mt['payload'] = file_line[(equpos+1):].strip()
-                   self.template.append(mt)
-                   mt = {}
-           except Exception as e:
-            printLn(str(e))
-        if tfe is False or len(self.template)<1:
-           self.templatename = ""
-        return self.template
-
+## MAIN ##
 pathname = os.path.dirname(sys.argv[0]) #os.path.dirname(__file__)
 # init file settings object
 try:
@@ -333,7 +283,7 @@ if cfg is not None: # read settings if ini file exists
              settings.data[o] = ovar
             except Exception as e:
              printLn("INI error:",str(e))
-          opts = ['testrun','retain','gen1','gen2','debug'] #booleans
+          opts = ['testrun','retain','gen1','gen2','debug','tasmo'] #booleans
           for o in opts:
            try:
             ovar = (int(cfg['CONFIG'][o]) == 1)
@@ -349,6 +299,8 @@ if cfg is not None: # read settings if ini file exists
             settings.gen2 = ovar
            elif o==opts[4]:
             settings.debug = ovar
+           elif o==opts[5]:
+            settings.tasmo = ovar
           printLn("Ini settings loaded")
         except Exception as e:
           printLn("INI error "+str(e))
@@ -375,10 +327,12 @@ if loopok and _tkok==1 and app is not None: # build GUI if available
             o_gen1.set(settings.gen1)
             o_gen2 = IntVar(app,name="gen2")
             o_gen2.set(settings.gen2)
+            o_tasmo = IntVar(app,name="tasmo")
+            o_tasmo.set(settings.tasmo)
 
             rwin = 1000
             app.geometry(str(rwin)+"x700")
-            app.title("ShellyTeacher for Domoticz MQTT AD")
+            app.title("Domoticz MQTT Autodiscovery helper")
             app.lift()
             app.protocol('WM_DELETE_WINDOW', exitApp)
             oframe = Frame(app,width=rwin)
@@ -411,10 +365,12 @@ if loopok and _tkok==1 and app is not None: # build GUI if available
             b_testrun.grid(column=0,row=3,columnspan=2, sticky = tk.W)
             b_debug = tk.Checkbutton(oframe,text="Show debug messages",font=('Arial', 12),variable=o_debug)
             b_debug.grid(column=2,row=3,columnspan=2, sticky = tk.W)
-            b_gen1 = tk.Checkbutton(oframe,text="Detect Gen1 devices",font=('Arial', 12),variable=o_gen1)
+            b_gen1 = tk.Checkbutton(oframe,text="Detect Shelly Gen1 devs",font=('Arial', 12),variable=o_gen1)
             b_gen1.grid(column=0,row=4,columnspan=2, sticky = tk.W)
-            b_gen2 = tk.Checkbutton(oframe,text="Detect Gen2 devices",font=('Arial', 12),variable=o_gen2)
+            b_gen2 = tk.Checkbutton(oframe,text="Detect Shelly Gen2 devs",font=('Arial', 12),variable=o_gen2)
             b_gen2.grid(column=2,row=4,columnspan=2, sticky = tk.W)
+            b_tasmo = tk.Checkbutton(oframe,text="Detect Tasmota devs",font=('Arial', 12),variable=o_tasmo)
+            b_tasmo.grid(column=4,row=4,columnspan=2, sticky = tk.W)
 
             b_scan = tk.Button(aframe,text="Start detection loop",font=('Arial', 12), command=changeProvision)
             b_scan.grid(column=0,row=0,sticky=tk.W+tk.E)
@@ -450,7 +406,7 @@ def syncguisettings():
             except:
              pass
 
-       opts = ['testrun','retain','gen1','gen2','debug'] #booleans
+       opts = ['testrun','retain','gen1','gen2','debug','tasmo'] #booleans
        for o in opts:
            try:
             ovar = (int(app.getvar(name=o))==1)
@@ -467,6 +423,8 @@ def syncguisettings():
              settings.gen2 = ovar
             elif o==opts[4]:
              settings.debug = ovar
+            elif o==opts[5]:
+             settings.tasmo = ovar
 
 def connect_mqtt():
  global mqttclient1, app
@@ -529,6 +487,26 @@ def connect_mqtt():
      loopok2 = True
    except Exception as e:
      printLn("Connection failed! "+str(e))
+   if app is not None:
+    app.update()
+  if settings.tasmo:
+   mqttclientt = MQTTClientTasmo() #tasmota
+   mqttclientt.subscribechannel = settings.data['trigger_topict']
+   if mqttclient1 is None:
+    mqttclient1 = mqttclientt
+   printLn("Connecting to MQTT server...")
+   loopok2 = False
+   try:
+     if settings.data['mqtt_user'] != "" or settings.data['mqtt_pass'] != "":
+      mqttclientt.username_pw_set(settings.data['mqtt_user'],settings.data['mqtt_pass'])
+     mqttclientt.connect(settings.data['mqtt_ip'],int(settings.data['mqtt_port']),keepalive=60)
+     mqttclientt.loop_start()
+     loopok2 = True
+   except Exception as e:
+     printLn("Connection failed! "+str(e))
+     return False
+   if app is not None:
+    app.update()
  else:
   printLn("Test run without MQTT connection")
   loopok2 = True
@@ -573,7 +551,11 @@ else:
    else:
     printLn("\nMQTT connection failed, alter settings, close app if necessary and retry!")
 
+if settings.data['discovery_prefix'][-1] == '/':
+   settings.data['discovery_prefix'][:-1]
 decodinprog = False
+waitfornext = False
+wcount = 0
 while loopok:
   if app is not None:
    app.update()
@@ -602,8 +584,8 @@ while loopok:
             printLn(str(e))
         else:
          printLn("---ERROR: GEN2 device "+str(di["shelly_id"])+" "+str(di["shelly_topic"])+" template not found")
-
-      else:
+        waitfornext = False
+      elif ('model' in settings.shjsons[devid]):
        devinfo = settings.shjsons[devid] # get next Gen1 device from queue
        try: # fallback id
         if ('model' not in devinfo or devinfo['model'] == "") or ('mode' not in devinfo or devinfo['mode'] == ""):
@@ -645,17 +627,44 @@ while loopok:
             printLn(str(e))
         else:
          printLn("---ERROR: GEN1 device "+str(di["shelly_ip"])+" "+str(model)+" "+str(di["shelly_id"])+" template not found")
-
-    try:
+       waitfornext = False
+      elif ('config' in settings.shjsons[devid]) or ('sensors' in settings.shjsons[devid]):
+       if ('config' not in settings.shjsons[devid]) or ('sensors' not in settings.shjsons[devid]):
+          waitfornext = True
+          wcount += 1
+          if wcount > 5:
+           waitfornext = False
+           wcount = 0
+          time.sleep(0.1)
+       else:
+          try:
+           di = {"discovery_prefix": settings.data['discovery_prefix']}
+           devinfo = settings.shjsons[devid] # get next Tasmota device from queue
+           td = Tasmota_Discovery(devid)
+           td.add_data('config',settings.shjsons[devid]['config'])
+           td.add_data('sensors',settings.shjsons[devid]['sensors'])
+           mt = td.get_templates()
+           if (td.getstate() & td.STAT_REPOK) > 0 and len(mt)>0:
+              printLn(">>>Tasmota device "+str(settings.shjsons[devid]['config']['ip'])+" "+str(settings.shjsons[devid]['config']['md'])+" found")
+              for i in range(len(mt)):
+                 if 'topic' in mt[i] and 'payload' in mt[i]:
+                  mqttstr = {"topic": fill_template_str(mt[i]['topic'], di),"payload": fill_template_str(mt[i]['payload'], di)}
+                  settings.mqttsender.append(mqttstr)
+          except Exception as e:
+           printLn(str(e))
+          waitfornext = False
+          wcount = 0
+    if waitfornext==False:
+     try:
       del settings.shque[0]
-    except:
+     except:
       pass
-    try:
+     try:
       del settings.shjsons[devid]
-    except:
+     except:
       pass
     decodinprog = False
-   elif len(settings.mqttsender)>0: #sending out prepared device autoconfig
+   if len(settings.mqttsender)>0: #sending out prepared device autoconfig
     mres = 1
     try:
      mres = 0
