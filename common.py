@@ -265,6 +265,9 @@ class Tasmota_Discovery:
                      tasmodict['subname'] = "" #reset value at the end
                      self.template.append(mt)
             if 'rl' in self.config: #relays
+              standard = True
+              if sum(self.config['rl'])==1:
+               standard = False #Power1 is not working if config has only one relay
               for i in range(0,len(self.config['rl'])):
                   if int(self.config['rl'][i])>0:
                      try:
@@ -278,8 +281,12 @@ class Tasmota_Discovery:
                      tasmodict['subname'] = subname
                      tmt = {}
                      tmt["name"] = tasmodict['subname']
-                     tmt["stat_t"] = tasmodict['stat_topic'] + "POWER"+str(i+1)
-                     tmt["cmd_t"] = tasmodict['cmd_topic'] + "POWER"+str(i+1)
+                     if standard == False and i==0:
+                      tmt["stat_t"] = tasmodict['stat_topic'] + "POWER"
+                      tmt["cmd_t"] = tasmodict['cmd_topic'] + "POWER"
+                     else:
+                      tmt["stat_t"] = tasmodict['stat_topic'] + "POWER"+str(i+1)
+                      tmt["cmd_t"] = tasmodict['cmd_topic'] + "POWER"+str(i+1)
                      tmt["avty_t"] = tasmodict['tele_topic'] + "LWT"
                      tmt["pl_avail"] = tasmodict["onln"]
                      tmt["pl_not_avail"] = tasmodict["ofln"]
