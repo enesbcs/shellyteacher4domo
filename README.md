@@ -120,7 +120,7 @@ Gen2:
 - Shelly Pro 4PM
 - Shelly Pro Dual Cover PM
 
-Gen3:
+Gen3: (Experimental! needs feedback! always make sure to download latest template.txt files!)
 - Shelly 1 Mini G3 / 1PM Mini G3
 - Shelly PM Mini G3
 - Shelly HT G3
