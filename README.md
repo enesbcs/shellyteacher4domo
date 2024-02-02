@@ -5,8 +5,10 @@ Shelly device teacher for Domoticz MQTT Autodiscovery hardware
 
 You need to understand before installation:
 - this is not compatible with the old ShellyMQTT plugin, its based on a different hardware, which will create new devices
-- only the Shelly device types listed in the "Implemented devices" will be recognised, but you can change/enhance templates.txt file to add more devices
 - its not a plugin, nor a service, it doesn't need to run all the time - only once (Domoticz MQTT Autodiscovery is the Domoticz integrated hardware)
+- only the Shelly device types listed in the "Implemented devices" will be recognised, but you can change/enhance templates.txt file to add more devices
+
+If you got a message "template not found" when teaching, than either your database is outdated/corrupted or your device is not supported. Please try to download latest *.txt files from github, before reporting issues.
 
 ## How it works
 When this program started it connects to the MQTT server and awaits for Shelly device announcements.
@@ -118,9 +120,13 @@ Gen2:
 - Shelly Pro 2 / 2PM [(* see position fix)](https://github.com/enesbcs/shellyteacher4domo/wiki/Shelly-2PM-Cover-Position)
 - Shelly Pro 3 / 3EM
 - Shelly Pro 4PM
-- Shelly Pro Dual Cover PM
+- Shelly Pro Dual Cover PM [(* see position fix)](https://github.com/enesbcs/shellyteacher4domo/wiki/Shelly-2PM-Cover-Position)
+- Shelly Pro EM-50
+- Shelly Plus 0-10V [(* see brightness fix)](https://github.com/enesbcs/shellyteacher4domo/wiki/Shelly-Plus-0%E2%80%9010V)
+- Shelly Wall Dimmer [(* see brightness fix)](https://github.com/enesbcs/shellyteacher4domo/wiki/Shelly-Plus-0%E2%80%9010V)
+- Shelly Plus Smoke
 
-Gen3: (Experimental! needs feedback! always make sure to download latest template.txt files!)
+Gen3: (Experimental! needs feedback!)
 - Shelly 1 Mini G3 / 1PM Mini G3
 - Shelly PM Mini G3
 - Shelly HT G3
