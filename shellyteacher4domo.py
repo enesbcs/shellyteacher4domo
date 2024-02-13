@@ -473,8 +473,12 @@ def connect_mqtt():
  loopok2 = False
  syncguisettings()
  if settings.testrun==False:
+  try:
+   mqttcompatibility = mqtt.CallbackAPIVersion.VERSION1
+  except:
+   mqttcompatibility = None   
   if settings.gen1:
-   mqttclient1 = MQTTClient() #gen1
+   mqttclient1 = MQTTClient(mqttcompatibility) #gen1
    mqttclient1.subscribechannel = settings.data['trigger_topic1']
    printLn("Connecting to MQTT server...")
    loopok2 = False
@@ -490,7 +494,7 @@ def connect_mqtt():
    if app is not None:
     app.update()
   if settings.gen2:
-   mqttclient2 = MQTTClient() #gen2
+   mqttclient2 = MQTTClient(mqttcompatibility) #gen2
    mqttclient2.subscribechannel = settings.data['trigger_topic2']
    if settings.gen1==False:
     mqttclient1 = mqttclient2
@@ -505,7 +509,7 @@ def connect_mqtt():
    except Exception as e:
      printLn("Connection failed! "+str(e))
      return False
-   mqttclient3 = MQTTClientOnlineCheck() #gen2 online
+   mqttclient3 = MQTTClientOnlineCheck(mqttcompatibility) #gen2 online
    mqttclient3.subscribechannel = settings.data['trigger_topic3']
    printLn("Connecting to MQTT server...")
    loopok2 = False
@@ -517,7 +521,7 @@ def connect_mqtt():
      loopok2 = True
    except Exception as e:
      printLn("Connection failed! "+str(e))
-   mqttclient4 = MQTTClientOnlineCheck() #gen2 online
+   mqttclient4 = MQTTClientOnlineCheck(mqttcompatibility) #gen2 online
    mqttclient4.subscribechannel = settings.data['trigger_topic4']
    printLn("Connecting to MQTT server...")
    loopok2 = False
