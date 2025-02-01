@@ -1,5 +1,7 @@
 [![Release downloads](https://img.shields.io/github/downloads/enesbcs/shellyteacher4domo/total.svg)]() [![Code size](https://img.shields.io/github/languages/code-size/enesbcs/shellyteacher4domo)]() [![Last commit](https://img.shields.io/github/last-commit/enesbcs/shellyteacher4domo)]()
 
+# I gave up on Shelly MQTT. If anyone has the desire and time to work on this, please apply and I will hand over the project to them.
+
 # ShellyTeacher 4 Domoticz
 Shelly device teacher for Domoticz MQTT Autodiscovery hardware
 
@@ -126,7 +128,7 @@ Gen2:
 - Shelly Wall Dimmer [(* see brightness fix)](https://github.com/enesbcs/shellyteacher4domo/wiki/Shelly-Plus-0%E2%80%9010V)
 - Shelly Plus Smoke
 
-Gen3: (Experimental! needs feedback!)
+Gen3: (Experimental! absolutely no support)
 - Shelly 1 Mini G3 / 1PM Mini G3
 - Shelly PM Mini G3
 - Shelly HT G3
